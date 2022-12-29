@@ -1,0 +1,6 @@
+{
+	"appId": "strapi.medusa.mobile",
+	"appName": "ion-strapi-medusa-mobile",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

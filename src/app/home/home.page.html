@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="logout()">
+                Logout
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="login()" expand="block" fill="clear" shape="round">
+                Login
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="enterTestPage()" expand="block" fill="solid" shape="round">
+                    Test Page
+                </ion-button>
+
+                <app-counter-input></app-counter-input>
+
+                <!-- <ion-button (click)="enterShop()" expand="block" fill="solid" shape="round">
+                    Enter Shop
+                </ion-button> -->
+            </ion-col>
+            <!-- <ion-col>
+                <ion-button (click)="enterBlog()" expand="block" fill="solid" shape="round">
+                    Enter Blog
+                </ion-button>
+            </ion-col> -->
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

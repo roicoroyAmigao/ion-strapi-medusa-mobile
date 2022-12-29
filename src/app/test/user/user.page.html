@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Ionic Angular Forms</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()" expand="block" fill="clear" shape="round">
+        back
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <app-user-form #userForm></app-user-form>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="submitUserForm()" expand="block" fill="solid">
+          Submit Register User Form
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <ion-grid fixed>
+    <ion-row>
+
+      <ion-col size="12" *ngIf="viewState$ | async as vs">
+        <app-address-form [vs]="vs" #addressForm></app-address-form>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-button (click)="submitAddressForm()" expand="block" fill="solid">
+          Submit Address Form
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+  <!-- <ion-row>
+    <ion-col size="12">
+      <app-login-form #loginForm></app-login-form>
+      <ion-button (click)="submitLoginForm()" expand="block" fill="solid">
+        Submit Login
+      </ion-button>
+    </ion-col>
+  </ion-row> -->
+
+  <!-- <ion-row>
+    <ion-col size="12">
+
+      <app-password-form #passwordForm></app-password-form>
+
+      <ion-button (click)="submitPassowordForm()" expand="block" fill="solid">
+        Submit Password Form
+      </ion-button>
+
+    </ion-col>
+  </ion-row> -->
+
+</ion-content>
