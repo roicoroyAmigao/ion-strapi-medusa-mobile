@@ -14,25 +14,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row>
-            <ion-col>
-                <ion-button (click)="enterTestPage()" expand="block" fill="solid" shape="round">
-                    Test Page
-                </ion-button>
-
-
-
-                <!-- <ion-button (click)="enterShop()" expand="block" fill="solid" shape="round">
-                    Enter Shop
-                </ion-button> -->
-            </ion-col>
-            <!-- <ion-col>
-                <ion-button (click)="enterBlog()" expand="block" fill="solid" shape="round">
-                    Enter Blog
-                </ion-button>
-            </ion-col> -->
-        </ion-row>
-    </ion-grid>
-
+    <app-categories [categoriesData]="categoriesData"></app-categories>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="enterTestPage()" expand="block" fill="solid" shape="round">
+            Test Page
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

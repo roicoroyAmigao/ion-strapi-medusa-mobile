@@ -13,6 +13,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { ColorsFormComponent } from './components/colors-form/colors-form.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { ColorsFormComponent } from './components/colors-form/colors-form.compon
     NgxsFormPluginModule,
     NgxsStoragePluginModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    ColorPickerModule
   ],
   declarations: [
     PasswordFormComponent,
@@ -32,7 +34,7 @@ import { ColorsFormComponent } from './components/colors-form/colors-form.compon
     AddressFormComponent,
     LoginFormComponent,
     UserFormComponent,
-    ColorsFormComponent
+    ColorsFormComponent,
   ],
   exports: [
     PasswordFormComponent,
@@ -40,7 +42,7 @@ import { ColorsFormComponent } from './components/colors-form/colors-form.compon
     AddressFormComponent,
     LoginFormComponent,
     UserFormComponent,
-    ColorsFormComponent
+    ColorsFormComponent,
   ]
 })
 export class FormComponentsModule { }

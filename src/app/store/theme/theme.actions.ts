@@ -7,4 +7,8 @@ export namespace ThemeActions {
         static readonly type = '[ThemeActions] Set Theme on State';
         constructor(public theme: any) { }
     }
+    export class PostUpdateTheme {
+        static readonly type = '[ThemeActions] Post Update Theme';
+        constructor(public theme: any) { }
+    }
 }

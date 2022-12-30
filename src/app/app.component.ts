@@ -5,6 +5,7 @@ import { CartMenuComponent } from 'projects/components/src/lib/components/app-me
 import { MedusaCartComponent } from 'projects/components/src/lib/components/medusa-cart/medusa-cart.component';
 import { AppAuthService } from 'projects/services/src/lib/services/auth.service';
 import { IonLanguageService } from 'projects/services/src/lib/services/language/language.service';
+import { ThemeService } from 'src/app/store/theme/theme-settings.service';
 import { clearSelectedProduct } from './store/products/products.actions';
 
 @Component({
@@ -29,13 +30,14 @@ export class AppComponent {
     public menu: MenuController,
     public store: Store,
     private platform: Platform,
+    private theme: ThemeService,
   ) {
     this.initApp();
   }
   async initApp() {
     this.platform.ready().then(() => {
       this.ionLanguageService.initTranslate();
-      // this.theme.initTheme();
+      this.theme.initTheme();
     });
   }
   checkout() {

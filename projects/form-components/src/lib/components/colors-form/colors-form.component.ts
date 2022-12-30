@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, forwardRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,7 +23,16 @@ import { Subscription } from 'rxjs';
 })
 export class ColorsFormComponent implements OnInit, OnDestroy {
 
-  colorsForm: FormGroup | any;
+  @ViewChild('primaryRef') public primaryRef: ElementRef;
+  @ViewChild('secondaryRef') public secondaryRef: ElementRef;
+  @ViewChild('tertiaryRef') public tertiaryRef: ElementRef;
+
+  // public primary = 'var(--ion-color-primary)';
+  // public secondary = 'var(--ion-color-secondary)';
+  // public tertiary = 'var(--ion-color-tertiary)';
+  public primary: any = null;
+  public secondary: any = null;
+  public tertiary: any = null;
 
   radioColorForm: FormGroup;
 
@@ -31,12 +41,15 @@ export class ColorsFormComponent implements OnInit, OnDestroy {
   onChange: any = () => { };
   onTouched: any = () => { };
 
+  presentingElement: any;
+
   get value(): any {
-    return this.colorsForm.value;
+    return this.radioColorForm.value;
   }
 
   set value(value: any) {
-    this.colorsForm.setValue(value);
+    console.log(value);
+    // this.radioColorForm.setValue(value);
     this.onChange(value);
     this.onTouched();
   }
@@ -46,26 +59,15 @@ export class ColorsFormComponent implements OnInit, OnDestroy {
   // }
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
-    this.radioColorForm = new FormGroup({
-      selected_color: new FormControl('#fc9961')
+    this.radioColorForm = this.formBuilder.group({
+      primary: new FormControl(),
+      secondary: new FormControl(),
+      tertiary: new FormControl(),
     });
-
-    this.colorsForm = this.formBuilder.group({
-      // email: new FormControl('', Validators.compose([
-      //   Validators.required,
-      //   Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
-      // ])),
-      // password: new FormControl('', Validators.compose([
-      //   Validators.minLength(5),
-      //   Validators.required,
-      //   Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')
-      // ])),
-    });
-
     this.subscriptions.push(
-      this.colorsForm.valueChanges.subscribe((value: any) => {
+      this.radioColorForm.valueChanges.subscribe((value: any) => {
         this.onChange(value);
         this.onTouched();
       })
@@ -74,6 +76,19 @@ export class ColorsFormComponent implements OnInit, OnDestroy {
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() { }
+
+  public capturePrimaryColour(event: any): void {
+    this.primary = event;
+    this.primaryRef.nativeElement.style.backgroundColor = this.primary;
+  }
+  public captureSecondaryColour(event: any): void {
+    this.secondary = event;
+    this.secondaryRef.nativeElement.style.backgroundColor = this.secondary;
+  }
+  public captureTertiaryColour(event: any): void {
+    this.tertiary = event;
+    this.tertiaryRef.nativeElement.style.backgroundColor = this.tertiary;
+  }
 
   registerOnChange(fn: any) {
     this.onChange = fn;
@@ -84,14 +99,14 @@ export class ColorsFormComponent implements OnInit, OnDestroy {
       this.value = value;
     }
     if (value === null) {
-      this.colorsForm.reset();
+      this.radioColorForm.reset();
     }
   }
   registerOnTouched(fn: any) {
     this.onTouched = fn;
   }
   validate(_: FormControl) {
-    return this.colorsForm.valid ? null : { profile: { valid: false, }, };
+    return this.radioColorForm.valid ? null : { profile: { valid: false, }, };
   }
   ngOnDestroy() {
     this.subscriptions.forEach(s => s.unsubscribe());

@@ -6,6 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test-home.page.scss'],
 })
 export class TestHomePage implements OnInit {
+  categoriesData = [
+    {
+      id: 1,
+      url: 'news',
+      title: 'News',
+      image: 'assets/shapes.svg',
+    },
+    {
+      id: 2,
+      url: 'fashion',
+      title: 'fashion',
+      image: 'assets/shapes.svg',
+    },
+    {
+      id: 3,
+      url: 'deals',
+      title: 'deals',
+      image: 'assets/shapes.svg',
+    }
+  ]
 
   constructor() { }
 

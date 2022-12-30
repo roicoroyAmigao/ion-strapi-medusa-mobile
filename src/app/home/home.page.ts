@@ -18,6 +18,27 @@ export class HomePage {
 
     viewState$: Observable<any>;
 
+    categoriesData = [
+        {
+            id: 1,
+            url: 'news',
+            title: 'News',
+            image: 'assets/shapes.svg',
+        },
+        {
+            id: 2,
+            url: '/test/fashion',
+            title: 'fashion',
+            image: 'assets/shapes.svg',
+        },
+        {
+            id: 3,
+            url: 'deals',
+            title: 'deals',
+            image: 'assets/shapes.svg',
+        }
+    ]
+
     constructor(
         private navigation: NavigationService,
         private facade: HomeFacade,
