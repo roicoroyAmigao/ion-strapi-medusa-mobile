@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { FormControl, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 
-export function counterRangeValidator(minValue: string | number, maxValue: string | number) {
+export function counterRangeValidator(minValue: string | number, maxValue: string | number): any {
   return (c: FormControl) => {
     const err = {
       rangeError: {
@@ -33,8 +33,8 @@ export class CounterInputComponent implements ControlValueAccessor, OnChanges {
   // tslint:disable-next-line:no-input-rename
   @Input('min') counterRangeMin: any;
 
-  propagateChange: any = () => {}; // Noop function
-  validateFn: any = () => {}; // Noop function
+  propagateChange: any = () => { }; // Noop function
+  validateFn: any = () => { }; // Noop function
 
   get counterValue() {
     return this._counterValue;
@@ -61,7 +61,7 @@ export class CounterInputComponent implements ControlValueAccessor, OnChanges {
     this.propagateChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched() { }
 
   increase() {
     this.counterValue++;

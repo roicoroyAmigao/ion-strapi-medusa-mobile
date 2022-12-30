@@ -22,4 +22,16 @@ export class TestPage implements OnInit {
   formCase() {
     this.navigation.navigateFlip('test/form');
   }
+  fashionPage() {
+    this.navigation.navigateFlip('test/fashion');
+  }
+  testHomePage() {
+    this.navigation.navigateFlip('test/test-home');
+  }
+  testProfilePage() {
+    this.navigation.navigateFlip('test/test-profile');
+  }
+  testSettingsPage() {
+    this.navigation.navigateFlip('test/test-settings');
+  }
 }

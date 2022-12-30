@@ -1,9 +1,38 @@
-
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Test Page</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- <ion-router-outlet></ion-router-outlet> -->
+  <ion-button (click)="formCase()" expand="block" fill="clear" shape="round">
+    Form Page
+  </ion-button>
+  <ion-button (click)="userCase()" expand="block" fill="clear" shape="round">
+    User Page
+  </ion-button>
+  <ion-button (click)="fashionPage()" expand="block" fill="clear" shape="round">
+    Fashion Page
+  </ion-button>
+
+  <ion-button (click)="testHomePage()" expand="block" fill="clear" shape="round">
+    Test Home Page
+  </ion-button>
+
+  <ion-button (click)="testProfilePage()" expand="block" fill="clear" shape="round">
+    Profile Page
+  </ion-button>
+
+  <ion-button (click)="testSettingsPage()" expand="block" fill="clear" shape="round">
+    Settings Page
+  </ion-button>
+
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <ion-button (click)="formCase()" expand="block" fill="clear" shape="round">
       Form PAge
@@ -11,5 +40,8 @@
     <ion-button (click)="userCase()" expand="block" fill="clear" shape="round">
       Login Page
     </ion-button>
+    <ion-button (click)="fashionPage()" expand="block" fill="clear" shape="round">
+      Fashion
+    </ion-button>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

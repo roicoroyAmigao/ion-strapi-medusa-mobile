@@ -29,6 +29,7 @@ export interface PasswordFormValues {
 })
 export class PasswordFormComponent implements ControlValueAccessor, OnDestroy {
   passwordForm: FormGroup | any;
+
   subscriptions: Subscription[] = [];
 
   get value(): PasswordFormValues {

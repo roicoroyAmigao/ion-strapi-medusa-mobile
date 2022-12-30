@@ -14,6 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { CartMenuComponent } from './components/app-menu/cart-menu.component';
 import { MedusaCartComponent } from './components/medusa-cart/medusa-cart.component';
+import { CategoriesPage } from './components/categories/categories.page';
+import { ContactCardPage } from './components/contact-card/contact-card.page';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
     imports: [
@@ -34,6 +37,9 @@ import { MedusaCartComponent } from './components/medusa-cart/medusa-cart.compon
     RatingInputComponent,
     CartMenuComponent,
     MedusaCartComponent,
+    CategoriesPage,
+    ContactCardPage,
+    SettingsComponent
   ],
   exports: [
     ShellModule,
@@ -44,6 +50,9 @@ import { MedusaCartComponent } from './components/medusa-cart/medusa-cart.compon
     RatingInputComponent,
     CartMenuComponent,
     MedusaCartComponent,
+    CategoriesPage,
+    ContactCardPage,
+    SettingsComponent
   ]
 })
 export class ComponentsModule { }

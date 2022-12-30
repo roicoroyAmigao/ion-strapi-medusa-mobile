@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { CountryPhone } from './country-phone.model';
 import { Router } from '@angular/router';
-import { PasswordValidator } from '../validators/password.validator';
-import { PhoneValidator } from '../validators/phone.validator';
-import { UsernameValidator } from '../validators/username.validator';
+import { PasswordValidator } from 'projects/form-components/src/lib/validators/password.validator';
+import { PhoneValidator } from 'projects/form-components/src/lib/validators/phone.validator';
+import { UsernameValidator } from 'projects/form-components/src/lib/validators/username.validator';
 
 @Component({
   selector: 'app-form',

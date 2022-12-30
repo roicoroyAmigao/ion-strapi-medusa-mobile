@@ -7,21 +7,39 @@ const routes: Routes = [
   {
     path: '',
     component: TestPage,
-    children: [
-      {
-        path: 'user',
-        loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
-      },
-      {
-        path: 'form',
-        loadChildren: () => import('./form/form.module').then( m => m.FormPageModule)
-      },
-      {
-        path: '',
-        redirectTo: 'form',
-        pathMatch: 'full'
-      }
-    ]
+  },
+  // {
+  //   path: '',
+  //   redirectTo: 'fashion',
+  //   pathMatch: 'full'
+  // },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserPageModule)
+  },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then(m => m.FormPageModule)
+  },
+  {
+    path: 'fashion',
+    loadChildren: () => import('./fashion/listing/fashion-listing.module').then(m => m.FashionListingPageModule)
+  },
+  {
+    path: 'fashion/:productId',
+    loadChildren: () => import('./fashion/details/fashion-details.module').then(m => m.FashionDetailsPageModule)
+  },
+  {
+    path: 'test-home',
+    loadChildren: () => import('./test-home/test-home.module').then( m => m.TestHomePageModule)
+  },
+  {
+    path: 'test-profile',
+    loadChildren: () => import('./test-profile/test-profile.module').then( m => m.TestProfilePageModule)
+  },
+  {
+    path: 'test-settings',
+    loadChildren: () => import('./test-settings/test-settings.module').then( m => m.TestSettingsPageModule)
   }
 ];
 

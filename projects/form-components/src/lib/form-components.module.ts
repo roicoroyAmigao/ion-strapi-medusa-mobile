@@ -12,15 +12,9 @@ import { ComponentsModule } from 'projects/components/src/public-api';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
+import { ColorsFormComponent } from './components/colors-form/colors-form.component';
 
 @NgModule({
-  declarations: [
-    PasswordFormComponent,
-    ProfileFormComponent,
-    AddressFormComponent,
-    LoginFormComponent,
-    UserFormComponent,
-  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,12 +26,21 @@ import { NgxsModule } from '@ngxs/store';
     ReactiveFormsModule,
     ComponentsModule
   ],
+  declarations: [
+    PasswordFormComponent,
+    ProfileFormComponent,
+    AddressFormComponent,
+    LoginFormComponent,
+    UserFormComponent,
+    ColorsFormComponent
+  ],
   exports: [
     PasswordFormComponent,
     ProfileFormComponent,
     AddressFormComponent,
     LoginFormComponent,
     UserFormComponent,
+    ColorsFormComponent
   ]
 })
 export class FormComponentsModule { }
