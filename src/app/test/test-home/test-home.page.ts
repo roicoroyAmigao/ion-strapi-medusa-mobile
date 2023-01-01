@@ -8,19 +8,19 @@ import { Component, OnInit } from '@angular/core';
 export class TestHomePage implements OnInit {
   categoriesData = [
     {
-      id: 1,
+      // id: 1,
       url: 'news',
       title: 'News',
       image: 'assets/shapes.svg',
     },
     {
-      id: 2,
+      // id: 2,
       url: 'fashion',
       title: 'fashion',
       image: 'assets/shapes.svg',
     },
     {
-      id: 3,
+      // id: 3,
       url: 'deals',
       title: 'deals',
       image: 'assets/shapes.svg',

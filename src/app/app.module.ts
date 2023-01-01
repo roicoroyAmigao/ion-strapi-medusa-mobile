@@ -40,6 +40,7 @@ import { ErrorService } from 'projects/services/src/lib/errors/errors/server-err
 import { StrapiAuthInterceptor } from 'projects/services/src/lib/services/strapi.interceptor';
 import { ProductState } from './store/products/products.state';
 import { ComponentsModule } from 'projects/components/src/public-api';
+import { CategoriesState } from './store/categories/categories.state';
 
 registerLocaleData(localePT, 'pt');
 registerLocaleData(localeEN, 'en');
@@ -83,7 +84,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       PaymentState,
       StrapiUserState,
       ThemeState,
-      LanguageState
+      LanguageState,
+      CategoriesState
     ]),
     NgxsStoragePluginModule.forRoot({
       key: [
@@ -99,7 +101,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         'payment',
         'strapiUser',
         'language',
-        'theme'
+        'theme',
+        "categories"
       ]
     }),
     NgxsFormPluginModule.forRoot(),

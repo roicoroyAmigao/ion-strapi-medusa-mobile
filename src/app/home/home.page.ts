@@ -6,6 +6,9 @@ import { AuthRoutePath } from '../auth/route-path.enum';
 import { AppAuthService } from 'projects/services/src/lib/services/auth.service';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { HomeFacade } from './home.facade';
+import { CategoriesActions } from '../store/categories/categories.actions';
+import { IAppCategories } from '../store/categories/categories.service';
+import { IHeaderData } from 'projects/components/src/lib/components/header/header.component';
 
 @Component({
     selector: 'app-home',
@@ -18,34 +21,25 @@ export class HomePage {
 
     viewState$: Observable<any>;
 
-    categoriesData = [
-        {
-            id: 1,
-            url: 'news',
-            title: 'News',
-            image: 'assets/shapes.svg',
-        },
-        {
-            id: 2,
-            url: '/test/fashion',
-            title: 'fashion',
-            image: 'assets/shapes.svg',
-        },
-        {
-            id: 3,
-            url: 'deals',
-            title: 'deals',
-            image: 'assets/shapes.svg',
-        }
-    ]
+    headerData: IHeaderData = {
+        avatar: '',
+    }
+    categoriesData: any = [];
 
     constructor(
         private navigation: NavigationService,
         private facade: HomeFacade,
         private auth: AppAuthService,
-    ) { }
-    ionViewWillEnter() {
+        private store: Store,
+    ) {
         this.viewState$ = this.facade.viewState$;
+        this.viewState$.subscribe((state) => {
+            console.log(state);
+            this.categoriesData = state?.categories;
+        });
+    }
+    ionViewWillEnter() {
+        this.store.dispatch(new CategoriesActions.GetCategories());
     }
     enterTestPage() {
         this.navigation.navigateForward('/test', 'forward');

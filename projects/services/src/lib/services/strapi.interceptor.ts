@@ -4,6 +4,8 @@ import { catchError } from 'rxjs/operators';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { Store } from '@ngxs/store';
+import { LogErrorEntry } from 'src/app/store/errors-logging/errors-logging.actions';
+import { StrapiUserActions } from 'src/app/store/strapi-user/strapi-user.actions';
 
 
 @Injectable({
@@ -14,19 +16,19 @@ export class StrapiAuthInterceptor implements HttpInterceptor {
         private store: Store,
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler) {
-        // return this.store.dispatch(new StrapiUserActions.GetStrapiLoggedIn)
-        //     .pipe(
-        //         mergeMap((state: any) => {
-        //             // console.log(state.strapiUser.token);
-        //             const clonedReq = this.addToken(request, state.strapiUser.token);
-        //             return next.handle(clonedReq) || null;
-        //         }),
-        //         catchError((response: HttpErrorResponse) => throwError(() => {
-        //             this.store.dispatch(new LogErrorEntry(response));
-        //             new Error(response.message);
-        //         }))
-        //     );
-        return next.handle(request);
+        return this.store.dispatch(new StrapiUserActions.GetStrapiLoggedIn)
+            .pipe(
+                mergeMap((state: any) => {
+                    // console.log(state.strapiUser.token);
+                    const clonedReq = this.addToken(request, state.strapiUser.token);
+                    return next.handle(clonedReq) || null;
+                }),
+                catchError((response: HttpErrorResponse) => throwError(() => {
+                    this.store.dispatch(new LogErrorEntry(response));
+                    new Error(response.message);
+                }))
+            );
+        // return next.handle(request);
     }
     private addToken(request: HttpRequest<any>, token: any) {
         if (token) {

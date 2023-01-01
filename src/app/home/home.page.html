@@ -1,20 +1,7 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-button (click)="logout()">
-                Logout
-            </ion-button>
-        </ion-buttons>
-        <ion-buttons slot="end">
-            <ion-button (click)="login()" expand="block" fill="clear" shape="round">
-                Login
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-</ion-header>
+<lib-header *ngIf="viewState$ | async as vs" [headerData]="vs"></lib-header>
 
-<ion-content>
-    <app-categories [categoriesData]="categoriesData"></app-categories>
+<ion-content *ngIf="viewState$ | async as vs">
+    <app-categories [categoriesData]="vs.categories"></app-categories>
 </ion-content>
 <ion-footer>
     <ion-toolbar>

@@ -29,10 +29,10 @@ export class UserComponent {
 
   ionViewDidEnter() {
     if (this.userForm) {
-      this.userForm.userForm.get('username').setValue('rocio');
+      this.userForm.userForm.get('username').setValue('roicoroy');
       this.userForm.userForm.get('first_name').setValue('Rocio');
       this.userForm.userForm.get('last_name').setValue('de Oliveira');
-      this.userForm.userForm.get('email').setValue('rocio@test.com');
+      this.userForm.userForm.get('email').setValue('roicoroy@test.com');
       this.userForm.userForm.get('phone').setValue('+4407510998877');
       this.userForm.userForm.get('matching_passwords').get('password').setValue('Rwbento123');
       this.userForm.userForm.get('matching_passwords').get('confirm_password').setValue('Rwbento123');

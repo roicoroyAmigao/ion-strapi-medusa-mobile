@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <app-contact-card></app-contact-card> -->
+
+  <div *ngIf="viewState$ | async as vs">
+    <app-profile-form [profileData]="vs" #profileForm></app-profile-form>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="submitProfileForm()" expand="block" fill="clear" shape="round">
+      Submit Form
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -9,7 +9,7 @@ import { StrapiUserState } from '../store/strapi-user/strapi-user.state';
 @Injectable({
     providedIn: 'root'
 })
-export class HomeFacade {
+export class ProfileFacade {
 
     @Select(CategoriesState.getgetCategoreisTheme) categories$: Observable<any>;
 

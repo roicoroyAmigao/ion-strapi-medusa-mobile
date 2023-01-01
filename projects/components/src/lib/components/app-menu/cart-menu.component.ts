@@ -13,7 +13,7 @@ export class CartMenuComponent {
 
   viewState$: Observable<any>;
 
-  @Input() menuId: string;
+  @Input() menuId: string = 'end';
 
   @Input() icon = 'cart-outline';
 

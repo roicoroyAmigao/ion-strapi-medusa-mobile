@@ -12,7 +12,7 @@ export class UserStateModel {
     isLoggedIn: boolean | any;
     token: string | any;
     strapiUserId: string | any;
-    // avatar: string | any;
+    avatar: string | any;
 }
 
 @State<UserStateModel>({
@@ -22,7 +22,7 @@ export class UserStateModel {
         isLoggedIn: null,
         token: null,
         strapiUserId: null,
-        // avatar: null,
+        avatar: null,
     }
 })
 @Injectable()
@@ -124,15 +124,16 @@ export class StrapiUserState {
                 },
             );
     }
+
     @Action(StrapiUserActions.UpdateStrapiUser)
     updateStrapiUser(ctx: StateContext<UserStateModel>, { profileForm }: StrapiUserActions.UpdateStrapiUser) {
-        // const state = ctx.getState();
         const user = this.store.selectSnapshot<any>((state) => state.strapiUser?.user);
 
         return this.strapi.updateStrapiUserProfile(user?.id, profileForm).subscribe((res: any) => {
             this.store.dispatch(new StrapiUserActions.GetStrapiUser()).subscribe((state) => { });
         });
     }
+
     @Action(StrapiUserActions.UploadProfileImage)
     async uploadProfileImage(ctx: StateContext<UserStateModel>, { formData }: StrapiUserActions.UploadProfileImage) {
         const res: any = await firstValueFrom(this.strapi.uploadData(formData));
@@ -143,6 +144,7 @@ export class StrapiUserState {
             this.store.dispatch(new StrapiUserActions.GetStrapiUser());
         }
     }
+
     @Action(StrapiUserActions.GetStrapiUser)
     getStrapiUser(ctx: StateContext<UserStateModel>) {
         const state = ctx.getState();

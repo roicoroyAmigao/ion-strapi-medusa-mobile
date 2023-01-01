@@ -44,6 +44,8 @@ export class LoginPage {
       const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
       if (errorEntry === null) {
         this.navigation.navigateFlip('/home');
+        // console.log(window.document.cookie);
+        // console.log(window);
       }
     }, 100);
   }

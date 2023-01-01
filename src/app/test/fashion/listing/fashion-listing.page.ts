@@ -37,7 +37,7 @@ export class FashionListingPage {
     });
     const dataSource: Observable<FashionListingModel> = this.fashionService.getListingDataSource();
     dataSource.subscribe((src) => {
-      // console.log(src);
+      console.log(src);
       this.listing = src;
     });
   }

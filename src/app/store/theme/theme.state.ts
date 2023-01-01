@@ -64,10 +64,11 @@ export class ThemeState {
     }
 
     @Action(ThemeActions.PostUpdateTheme)
-    postUpdateTheme(ctx: StateContext<ThemeStateModel>, { theme }: ThemeActions.PostUpdateTheme) {
+    postUpdateTheme(ctx: StateContext<ThemeStateModel>, { id, theme }: ThemeActions.PostUpdateTheme) {
         const state = ctx.getState();
         console.log(theme);
-        this.themeService.postAppTheme(theme)
+        const lid = id;
+        this.themeService.postAppTheme(lid, theme)
             .pipe(
                 catchError((err: HttpErrorResponse) => throwError(() => {
                     this.store.dispatch(new LogErrorEntry(err));

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 export interface ICategoriesList {
   id?: string,
@@ -16,13 +16,19 @@ export interface ICategoriesList {
     './styles/categories.responsive.scss'
   ]
 })
-export class CategoriesPage {
-  @Input() categoriesData: any;
+export class CategoriesPage implements AfterViewInit {
+  @Input() categoriesData: ICategoriesList[];
 
   constructor(
     private navigation: NavigationService,
-) { }
+  ) { }
 
+  ngAfterViewInit(): void {
+    console.log(this.categoriesData);
+  }
+  ionViewDidEnter() {
+    console.log(this.categoriesData);
+  }
   navigate(url: string) {
     console.log('navigate', url);
     this.navigation.navigateFlip(url);

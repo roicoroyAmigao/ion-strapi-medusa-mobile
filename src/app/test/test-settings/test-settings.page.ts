@@ -40,7 +40,7 @@ export class TestSettingsPage {
       }
     }
     console.log(theme);
-    this.store.dispatch(new ThemeActions.PostUpdateTheme(theme));
+    // this.store.dispatch(new ThemeActions.PostUpdateTheme(theme));
   }
 
 }

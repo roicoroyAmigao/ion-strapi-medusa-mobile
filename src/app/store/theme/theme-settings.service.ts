@@ -89,18 +89,18 @@ export class ThemeService {
 
     getAppTheme(): Observable<AppTheme> {
 
-        return this.httpClient.get<AppTheme>(environment.BASE_PATH + '/api/app-theme?populate=*', { headers: this.headers });
+        return this.httpClient.get<AppTheme>(environment.BASE_PATH + '/api/app-infos?populate=*', { headers: this.headers });
     }
-    postAppTheme(theme: AppTheme): Observable<AppTheme> {
+    postAppTheme(id: string, theme: AppTheme): Observable<AppTheme> {
 
-        return this.httpClient.put<AppTheme>(environment.BASE_PATH + '/api/app-theme', theme, { headers: this.headers });
+        return this.httpClient.put<AppTheme>(environment.BASE_PATH + '/api/app-infos/' + id, theme, { headers: this.headers });
     }
     initTheme() {
         const theme: any = firstValueFrom(this.store.dispatch(new ThemeActions.GetTheme()));
-        console.log(theme.theme?.styles);
+        // console.log(theme.theme?.styles);
         this.store.dispatch(new ThemeActions.GetTheme());
         const styles = this.store.selectSnapshot<any>((state) => state.theme?.styles);
-        console.log('styles', styles);
+        // console.log('styles', styles);
         this.setTheme(styles);
     }
 

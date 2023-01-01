@@ -17,6 +17,8 @@ import { MedusaCartComponent } from './components/medusa-cart/medusa-cart.compon
 import { CategoriesPage } from './components/categories/categories.page';
 import { ContactCardPage } from './components/contact-card/contact-card.page';
 import { SettingsComponent } from './components/settings/settings.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ImagePickerComponent } from './components/image-picker/image-picker.component';
 
 @NgModule({
     imports: [
@@ -39,7 +41,9 @@ import { SettingsComponent } from './components/settings/settings.component';
     MedusaCartComponent,
     CategoriesPage,
     ContactCardPage,
-    SettingsComponent
+    SettingsComponent,
+    HeaderComponent,
+    ImagePickerComponent
   ],
   exports: [
     ShellModule,
@@ -52,7 +56,9 @@ import { SettingsComponent } from './components/settings/settings.component';
     MedusaCartComponent,
     CategoriesPage,
     ContactCardPage,
-    SettingsComponent
+    SettingsComponent,
+    HeaderComponent,
+    ImagePickerComponent
   ]
 })
 export class ComponentsModule { }

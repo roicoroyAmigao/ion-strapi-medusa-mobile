@@ -19,11 +19,6 @@ export class AppComponent {
 
   @ViewChild(CartMenuComponent) menuComponent: CartMenuComponent;
 
-
-  public appPages = [
-    { title: 'Home', url: '/home', icon: 'home' },
-  ];
-
   constructor(
     private authService: AppAuthService,
     private ionLanguageService: IonLanguageService,
@@ -37,7 +32,7 @@ export class AppComponent {
   async initApp() {
     this.platform.ready().then(() => {
       this.ionLanguageService.initTranslate();
-      this.theme.initTheme();
+      // this.theme.initTheme();
     });
   }
   checkout() {

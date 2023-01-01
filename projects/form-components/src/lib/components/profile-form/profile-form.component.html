@@ -1,18 +1,89 @@
-<div [formGroup]="form">
+<ion-grid class="contact-card-content">
+  <ion-row [formGroup]="profileForm" class="user-details-wrapper">
+
+    <ion-col size="4">
+      <app-aspect-ratio [ratio]="{w: 1, h: 1}">
+        <app-image-picker [userAvatar]="avatar" (imagePick)="onImagePicked($event)"></app-image-picker>
+      </app-aspect-ratio>
+    </ion-col>
+
+    <ion-col class="user-info-wrapper" size="8">
+      <h3 class="user-name">
+
+        <ion-input [value]="'Ricardo'" [clearInput]="true" formControlName="firstName" placeholder="First Name"></ion-input>
+
+        <ion-input [value]="'Bento'" [clearInput]="true" formControlName="lastName" placeholder="Last Name"></ion-input>
+
+      </h3>
+      <h5 class="user-handle">
+        <ion-input [clearInput]="true" [value]="'roicoroy'" formControlName="username" id="username" placeholder="@clairehale"></ion-input>
+      </h5>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row class="user-preferences-wrapper ion-margin">
+    <ion-col size="12">
+      <h4 class="preference-name">Mobile</h4>
+      <p class="preference-value">
+        +1-202-555-0102
+      </p>
+    </ion-col>
+    <ion-col size="12">
+      <h4 class="preference-name">Email</h4>
+      <p class="preference-value">
+        clairhale@ionic.com
+      </p>
+    </ion-col>
+    <ion-col size="12">
+      <h4 class="preference-name">Address</h4>
+      <p class="preference-value">
+        921 Church St, San Francisco, CA
+        <br />
+        94114, USA
+      </p>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>
+
+
+
+
+
+<!-- <ion-row>
+  <ion-col size-sm="6" offset-sm="3">
+    <app-image-picker [userAvatar]="avatar" (imagePick)="onImagePicked($event)"></app-image-picker>
+  </ion-col>
+</ion-row>
+
+<div [formGroup]="profileForm">
+
+  <ion-label for="username">User Name</ion-label>
+  <ion-input formControlName="username" id="username"></ion-input>
+  <div *ngIf="usernameControl.touched && usernameControl.hasError('required')" class="error">
+    email is required
+  </div>
+
   <ion-label for="first-name">First Name</ion-label>
-  <ion-input formControlName="firstName" id="first-name" ></ion-input>
+  <ion-input formControlName="firstName" id="first-name"></ion-input>
+  <div *ngIf="firstNameControl.touched && firstNameControl.hasError('required')" class="error">
+    email is required
+  </div>
 
   <ion-label for="last-name">Last Name</ion-label>
-  <ion-input formControlName="lastName" id="last-name" ></ion-input>
+  <ion-input formControlName="lastName" id="last-name"></ion-input>
+  <div *ngIf="lastNameControl.touched && lastNameControl.hasError('required')" class="error">
+    email is required
+  </div>
 
   <ion-label for="email">Email</ion-label>
-  <ion-input formControlName="email" type="email" id="email" ></ion-input>
-  
-  <ion-label for="phone">Phone</ion-label>
-  <ion-input formControlName="phone" type="phone" id="phone" ></ion-input>
-  
+  <ion-input formControlName="email" type="email" id="email"></ion-input>
   <div *ngIf="emailControl.touched && emailControl.hasError('required')" class="error">
     email is required
   </div>
 
-</div>
+  <ion-label for="phone">Phone</ion-label>
+  <ion-input formControlName="phone" type="phone" id="phone"></ion-input>
+
+</div> -->

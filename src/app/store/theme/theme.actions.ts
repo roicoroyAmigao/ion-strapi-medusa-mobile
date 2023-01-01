@@ -9,6 +9,6 @@ export namespace ThemeActions {
     }
     export class PostUpdateTheme {
         static readonly type = '[ThemeActions] Post Update Theme';
-        constructor(public theme: any) { }
+        constructor(public id: string, public theme: any) { }
     }
 }
