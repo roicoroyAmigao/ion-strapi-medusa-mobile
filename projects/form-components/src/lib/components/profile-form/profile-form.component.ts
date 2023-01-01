@@ -3,12 +3,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormGroup, Valida
 import { Subscription } from 'rxjs';
 
 export interface ProfileFormValues {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  avatar: string;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
 }
 
 export interface ProfileFormState {
@@ -41,9 +41,27 @@ export interface ProfileFormState {
 export class ProfileFormComponent implements ControlValueAccessor, OnDestroy {
 
   @Input() set profileData(value: ProfileFormValues | any) {
+    console.log(value.user);
+    this._formValues = {
+      username: value?.user?.username ? value?.user?.username : '',
+      first_name: value?.user?.first_name ? value?.user?.first_name : '',
+      last_name: value?.user?.last_name ? value?.user?.last_name : '',
+      email: value?.user?.email ? value?.user?.email : '',
+      phone: value?.user?.phone ? value?.user?.phone : '',
+    }
+    this.profileForm.get('username').setValue(this.formValues?.username);
+    this.profileForm.get('first_name').setValue(this.formValues?.first_name || null);
+    this.profileForm.get('last_name').setValue(this.formValues?.last_name || null);
+    this.profileForm.get('email').setValue(this.formValues?.email);
+    this.profileForm.get('phone').setValue(this.formValues?.phone);
+
     this._avatar = value.avatar ? value.avatar : 'assets/shapes.svg';
     this._isLoggedIn = value.isUserLoggedIn && value.isCustomerLoggedIn ? true : false;
   };
+  get formValues(): any {
+    return this._formValues;
+  }
+  private _formValues: ProfileFormValues;
   get isLoggedIn(): boolean {
     return this._isLoggedIn;
   }
@@ -51,7 +69,6 @@ export class ProfileFormComponent implements ControlValueAccessor, OnDestroy {
   get avatar(): string {
     return this._avatar;
   }
-
   private _avatar: string;
 
   //
@@ -79,10 +96,10 @@ export class ProfileFormComponent implements ControlValueAccessor, OnDestroy {
     return this.profileForm.controls.username;
   }
   get firstNameControl() {
-    return this.profileForm.controls.firstName
+    return this.profileForm.controls.first_name
   }
   get lastNameControl() {
-    return this.profileForm.controls.lastName;
+    return this.profileForm.controls.last_name;
   }
   get avatarControl() {
     return this.profileForm.controls.avatar;
@@ -94,10 +111,10 @@ export class ProfileFormComponent implements ControlValueAccessor, OnDestroy {
 
     this.profileForm = this.formBuilder.group({
       username: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', Validators.required],
-      avatar: new FormData(),
+      avatar: [null],
       phone: [''],
     });
 

@@ -32,11 +32,25 @@ export class ProfilePage implements OnInit {
   }
 
   submitProfileForm() {
-    console.log(this.profileForm.profileForm.get('avatar').value);
+    // console.log(this.profileForm.profileForm);
+    if (this.profileForm.profileForm.valid) {
+      const postProfileData = {
+        username: this.profileForm.profileForm.value.username,
+        first_name: this.profileForm.profileForm.value.first_name,
+        last_name: this.profileForm.profileForm.value.last_name,
+        email: this.profileForm.profileForm.value.email,
+        phone: this.profileForm.profileForm.value.phone,
+      };
+      // console.log(postProfileData);
+      this.store.dispatch(new StrapiUserActions.UpdateStrapiUser(postProfileData));
 
-    // this.profileForm.submitForm();
-    // const formData: FormData = this.profileForm.profileForm.get('avatar').value;
-    // this.store.dispatch(new StrapiUserActions.UploadProfileImage(formData));
+      // this.profileForm.submitForm();
+      const formData: FormData = this.profileForm.profileForm.get('avatar').value;
+      if (this.profileForm.profileForm.value.avatar) {
+        console.log(formData);
+        this.store.dispatch(new StrapiUserActions.UploadProfileImage(formData));
+      }
+    }
   }
 
 }

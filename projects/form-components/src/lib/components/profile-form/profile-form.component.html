@@ -1,5 +1,5 @@
-<ion-grid class="contact-card-content">
-  <ion-row [formGroup]="profileForm" class="user-details-wrapper">
+<ion-grid [formGroup]="profileForm" class="contact-card-content">
+  <ion-row class="user-details-wrapper">
 
     <ion-col size="4">
       <app-aspect-ratio [ratio]="{w: 1, h: 1}">
@@ -10,13 +10,13 @@
     <ion-col class="user-info-wrapper" size="8">
       <h3 class="user-name">
 
-        <ion-input [value]="'Ricardo'" [clearInput]="true" formControlName="firstName" placeholder="First Name"></ion-input>
+        <ion-input [clearInput]="true" formControlName="first_name" placeholder="First Name"></ion-input>
 
-        <ion-input [value]="'Bento'" [clearInput]="true" formControlName="lastName" placeholder="Last Name"></ion-input>
+        <ion-input [clearInput]="true" formControlName="last_name" placeholder="Last Name"></ion-input>
 
       </h3>
       <h5 class="user-handle">
-        <ion-input [clearInput]="true" [value]="'roicoroy'" formControlName="username" id="username" placeholder="@clairehale"></ion-input>
+        <ion-input [clearInput]="true" formControlName="username" id="username" placeholder="@clairehale"></ion-input>
       </h5>
     </ion-col>
 
@@ -26,23 +26,27 @@
     <ion-col size="12">
       <h4 class="preference-name">Mobile</h4>
       <p class="preference-value">
-        +1-202-555-0102
+        <ion-input [clearInput]="true" formControlName="phone" placeholder="(+44)123123123"></ion-input>
       </p>
+
     </ion-col>
     <ion-col size="12">
       <h4 class="preference-name">Email</h4>
       <p class="preference-value">
-        clairhale@ionic.com
+
+        <ion-input [clearInput]="true" formControlName="email" placeholder="clairhale@ionic.com"></ion-input>
       </p>
     </ion-col>
-    <ion-col size="12">
+
+    <!-- <ion-col size="12">
       <h4 class="preference-name">Address</h4>
       <p class="preference-value">
         921 Church St, San Francisco, CA
         <br />
         94114, USA
       </p>
-    </ion-col>
+    </ion-col> -->
+
   </ion-row>
 
 </ion-grid>
