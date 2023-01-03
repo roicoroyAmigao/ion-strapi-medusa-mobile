@@ -3,7 +3,7 @@ import { NG_VALUE_ACCESSOR, FormGroup, FormBuilder, ControlValueAccessor, Valida
 import { DeviceInfo } from '@capacitor/device';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
-import { IonLanguageService } from 'projects/services/src/lib/services/language/language.service';
+import { IonLanguageService } from 'src/app/store/language/language/language.service';
 import { Observable, Subscription } from 'rxjs';
 
 export interface LanguageFormValues {

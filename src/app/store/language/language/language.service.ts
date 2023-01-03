@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Device } from '@capacitor/device';
 import { LanguageModel } from './language.model';
-import { IonStorageService } from '../ionstorage.service';
+import { IonStorageService } from '../../../../../projects/services/src/lib/services/ionstorage.service';
 import { Store } from '@ngxs/store';
 import { LanguageActions } from 'src/app/store/language/language.actions';
 import { BehaviorSubject, of } from 'rxjs';
@@ -39,10 +39,10 @@ export class IonLanguageService {
   async initTranslate() {
     const language = await Device.getLanguageCode();
     const device = await Device.getInfo();
-    const getLanguageTag = await Device.getLanguageTag();
-    console.log("language", language);
-    console.log("device", device);
-    console.log("getLanguageTag", getLanguageTag);
+    // const getLanguageTag = await Device.getLanguageTag();
+    // console.log("language", language);
+    // console.log("device", device);
+    // console.log("getLanguageTag", getLanguageTag);
     const deviceLanguage = await this.shortLanguage(language);
     const useLang = deviceLanguage.match(/en|pt/) ? deviceLanguage : 'en';
     if (useLang) {

@@ -33,12 +33,16 @@ export class TestSettingsPage {
     this.store.dispatch(new ThemeActions.GetTheme);
 
     this.viewState$ = this.facade.viewState$;
-    this.viewState$.subscribe((vs: any) => {
-      console.log(vs.user.device_token);
-    });
+    // this.viewState$.subscribe((vs: any) => {
+    //   console.log(vs.user?.fcm_accepted);
+    // });
   }
 
   ionViewDidEnter() {
+    const user = this.store.selectSnapshot<any>((state) => state.strapiUser.user);
+    // console.log(user.fcm_accepted);
+    // this.fcmForm.fcmForm.get('fcm_accepted').setValue(user.fcm_accepted);
+    this.fcmForm.fcmForm.get('fcm_accepted').setValue(user.fcm_accepted);
     const stateLanguage = this.store.selectSnapshot<any>((state) => state.language.language);
     this.languageForm.languageForm.get('language').setValue(stateLanguage);
   }

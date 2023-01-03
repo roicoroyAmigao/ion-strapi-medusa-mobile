@@ -36,6 +36,11 @@ export class StrapiUserState {
     ) { }
 
     @Selector()
+    static getFcmAccepted(state: UserStateModel) {
+        return state.user.fcm_accepted;
+    }
+
+    @Selector()
     static isLoggedIn(state: UserStateModel) {
         return state.isLoggedIn;
     }

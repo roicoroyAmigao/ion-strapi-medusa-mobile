@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { IonStorageService } from 'projects/services/src/lib/services/ionstorage.service';
-import { IonLanguageService, SAVED_LANGUAGE } from 'projects/services/src/lib/services/language/language.service';
+import { IonLanguageService, SAVED_LANGUAGE } from 'src/app/store/language/language/language.service';
 import { Subscription } from 'rxjs';
 
 @Component({
