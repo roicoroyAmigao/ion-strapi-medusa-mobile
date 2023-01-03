@@ -8,7 +8,7 @@ import { LogErrorEntry } from '../errors-logging/errors-logging.actions';
 import { ThemeActions } from './theme.actions';
 
 export class ThemeStateModel {
-    styles: ThemeService;
+    styles: any;
 }
 @State<ThemeStateModel>({
     name: 'theme',
@@ -42,6 +42,7 @@ export class ThemeState {
             )
             .subscribe({
                 next: (v: any) => {
+                    console.log("theme vvv", v);
                     return ctx.patchState({
                         ...state,
                         styles: v.data?.attributes,
@@ -64,11 +65,11 @@ export class ThemeState {
     }
 
     @Action(ThemeActions.PostUpdateTheme)
-    postUpdateTheme(ctx: StateContext<ThemeStateModel>, { id, theme }: ThemeActions.PostUpdateTheme) {
+    postUpdateTheme(ctx: StateContext<ThemeStateModel>, { theme }: ThemeActions.PostUpdateTheme) {
         const state = ctx.getState();
         console.log(theme);
-        const lid = id;
-        this.themeService.postAppTheme(lid, theme)
+        const lid = '1';
+        this.themeService.postAppTheme(theme)
             .pipe(
                 catchError((err: HttpErrorResponse) => throwError(() => {
                     this.store.dispatch(new LogErrorEntry(err));
@@ -77,6 +78,7 @@ export class ThemeState {
             )
             .subscribe({
                 next: (v: any) => {
+                    console.log('LLLLLLLLL',v);
                     return ctx.patchState({
                         ...state,
                         styles: v.data?.attributes,

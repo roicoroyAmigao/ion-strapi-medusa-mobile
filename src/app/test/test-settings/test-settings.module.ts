@@ -10,7 +10,7 @@ import { TestSettingsPage } from './test-settings.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { FormComponentsModule } from 'projects/form-components/src/public-api';
     NgxsFormPluginModule,
     TranslateModule,
     FormComponentsModule,
-    ComponentsModule,
+    CustomComponentsModule,
   ],
   declarations: [TestSettingsPage]
 })

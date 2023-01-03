@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,7 +9,11 @@ import { IonicModule } from '@ionic/angular';
 import { FashionDetailsPage } from './fashion-details.page';
 import { FashionDetailsResolver } from './fashion-details.resolver';
 import { FashionService } from '../fashion.service';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsModule } from '@ngxs/store';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
+import { FormComponentsModule } from 'projects/form-components/src/public-api';
 
 const routes: Routes = [
   {
@@ -27,8 +31,13 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxsModule,
+    NgxsFormPluginModule,
+    TranslateModule,
+    FormComponentsModule,
+    CustomComponentsModule
   ],
   declarations: [
     FashionDetailsPage

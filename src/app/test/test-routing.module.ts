@@ -14,20 +14,20 @@ const routes: Routes = [
   //   pathMatch: 'full'
   // },
   {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserPageModule)
-  },
-  {
-    path: 'form',
-    loadChildren: () => import('./form/form.module').then(m => m.FormPageModule)
-  },
-  {
     path: 'fashion',
     loadChildren: () => import('./fashion/listing/fashion-listing.module').then(m => m.FashionListingPageModule)
   },
   {
     path: 'fashion/:productId',
     loadChildren: () => import('./fashion/details/fashion-details.module').then(m => m.FashionDetailsPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then(m => m.UserPageModule)
+  },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then(m => m.FormPageModule)
   },
   {
     path: 'test-home',

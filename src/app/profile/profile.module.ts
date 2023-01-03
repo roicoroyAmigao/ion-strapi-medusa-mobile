@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
-import { ComponentsModule } from 'projects/components/src/lib/components.module';
+import { CustomComponentsModule } from 'projects/components/src/lib/components.module';
 import { FormComponentsModule } from 'projects/form-components/src/lib/form-components.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -23,7 +23,7 @@ import { NgxsModule } from '@ngxs/store';
     NgxsFormPluginModule,
     TranslateModule,
     FormComponentsModule,
-    ComponentsModule
+    CustomComponentsModule
   ],
   declarations: [ProfilePage]
 })

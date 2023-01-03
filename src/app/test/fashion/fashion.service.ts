@@ -20,7 +20,6 @@ export class FashionService {
   ) {
   }
 
-
   public getListingDataSource(): Observable<FashionListingModel> {
     return this.http.get<FashionListingModel>('./assets/sample-data/fashion/listing.json');
   }

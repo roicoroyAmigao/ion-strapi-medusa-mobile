@@ -3,10 +3,3 @@
 <ion-content *ngIf="viewState$ | async as vs">
     <app-categories [categoriesData]="vs.categories"></app-categories>
 </ion-content>
-<ion-footer>
-    <ion-toolbar>
-        <ion-button (click)="enterTestPage()" expand="block" fill="solid" shape="round">
-            Test Page
-        </ion-button>
-    </ion-toolbar>
-</ion-footer>

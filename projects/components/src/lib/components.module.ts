@@ -19,6 +19,7 @@ import { ContactCardPage } from './components/contact-card/contact-card.page';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ImagePickerComponent } from './components/image-picker/image-picker.component';
+import { LanguageComponent } from './components/language-component/language.component';
 
 @NgModule({
     imports: [
@@ -43,7 +44,8 @@ import { ImagePickerComponent } from './components/image-picker/image-picker.com
     ContactCardPage,
     SettingsComponent,
     HeaderComponent,
-    ImagePickerComponent
+    ImagePickerComponent,
+    LanguageComponent
   ],
   exports: [
     ShellModule,
@@ -58,7 +60,8 @@ import { ImagePickerComponent } from './components/image-picker/image-picker.com
     ContactCardPage,
     SettingsComponent,
     HeaderComponent,
-    ImagePickerComponent
+    ImagePickerComponent,
+    LanguageComponent
   ]
 })
-export class ComponentsModule { }
+export class CustomComponentsModule { }

@@ -28,6 +28,7 @@ export class CustomerState {
 
     headers_json = new HttpHeaders().set('Content-Type', 'application/json');
     headers_cookie = new HttpHeaders().set('Cookie', 'connect.sid={sid}');
+    headers_token = new HttpHeaders().set('Authorization', 'Bearer supersecret2');
 
     constructor(
         private store: Store,
@@ -63,7 +64,7 @@ export class CustomerState {
                     customer: response?.customer,
                     isLoggedIn: true,
                 });
-                this.store.dispatch(new CustomerActions.GetSession());
+                // this.store.dispatch(new CustomerActions.GetSession());
             }
         }
         catch (err: any) {

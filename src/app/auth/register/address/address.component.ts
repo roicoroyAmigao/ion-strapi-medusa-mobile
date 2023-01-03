@@ -68,7 +68,7 @@ export class AddressComponent implements OnDestroy {
       province: 'Georgia',
       metadata: {}
     };
-    console.log(registerAddress);
+    // console.log(registerAddress);
 
     this.store.dispatch(new CustomerRegisterActions.UpdateCustomerRegisterAddress(registerAddress));
 

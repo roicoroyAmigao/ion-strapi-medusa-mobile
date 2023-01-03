@@ -14,7 +14,6 @@ export const environment = {
   BASE_PATH: 'https://strapi-wkfc.onrender.com',
   MEDUSA_API_BASE_PATH: 'https://amigao-medusa-api.onrender.com',
   MEDUSA_API_BASE_PATH_DEV: 'https://amigao-medusa-api.onrender.com/',
-  instrumentationKey: null,
   STRIPE_KEY: 'pk_test_2qqvb6DTqKondL46mnEjZ68e',
   populate: '?populate=*',
   todo: '/todo',

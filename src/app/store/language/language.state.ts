@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
+import { DeviceInfo } from '@capacitor/device';
+import { TranslateService } from '@ngx-translate/core';
 import { State, Selector, Action, StateContext, Store } from '@ngxs/store';
+import { tap } from 'rxjs';
 import { LanguageActions } from './language.actions';
 
 export class LanguageStateModel {
     language: any;
+    device: DeviceInfo;
 }
 @State<LanguageStateModel>({
     name: 'language',
     defaults: {
         language: null,
+        device: null,
     }
 })
 @Injectable()
 export class LanguageState {
+
+    constructor(
+        public translate: TranslateService
+    ) {
+
+    }
 
     @Selector()
     static getLanguage(state: LanguageStateModel) {
@@ -22,15 +33,28 @@ export class LanguageState {
     @Action(LanguageActions.GetLanguage)
     getLanguage(ctx: StateContext<LanguageStateModel>) {
         const state = ctx.getState();
+        return state.language;
     }
 
-    @Action(LanguageActions.SetLanguage)
-    setLanguage(ctx: StateContext<LanguageStateModel>, { payload }: LanguageActions.SetLanguage) {
+    @Action(LanguageActions.SetLanguageDeviceInfo)
+    setLanguage(ctx: StateContext<LanguageStateModel>, { language, device }: LanguageActions.SetLanguageDeviceInfo) {
         const state = ctx.getState();
-        return ctx.patchState({
-            ...state,
-            language: payload,
-        });
+        this.translate.use(language)
+            .subscribe((res) => {
+                // console.log(res);
+                this.getTranslations();
+                ctx.patchState({
+                    ...state,
+                    language: language,
+                    device: device != null ? device : null,
+                });
+            });
     }
-
+    getTranslations() {
+        // get translations for this page to use in the Language Chooser Alert
+        this.translate.getTranslation(this.translate.currentLang)
+            .subscribe((translations) => {
+                console.log(translations);
+            });
+    }
 }

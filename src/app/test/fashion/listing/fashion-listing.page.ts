@@ -1,4 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { DataStore } from 'projects/components/src/lib/shell/data-store';
 import { Observable } from 'rxjs';
@@ -30,18 +31,28 @@ export class FashionListingPage {
     private fashionService: FashionService,
     private store: Store,
     private facade: FashionFacade,
+    private route: ActivatedRoute
   ) {
     this.viewState$ = this.facade.viewState$;
     this.viewState$.subscribe((state) => {
       console.log(state.productList);
     });
-    const dataSource: Observable<FashionListingModel> = this.fashionService.getListingDataSource();
-    dataSource.subscribe((src) => {
-      console.log(src);
-      this.listing = src;
-    });
+
+    // const dataSource: Observable<FashionListingModel> = this.fashionService.getListingDataSource();
+    // dataSource.subscribe((src) => {
+    //   this.listing = src;
+    // });
+  }
+  navigateDetails(item: any) {
+    console.log(item);
   }
   ionViewWillEnter() {
+    // this.route.data.subscribe((resolvedRouteData) => {
+    //   // const listingDataStore = resolvedRouteData['data'];
+    //   // this.listing = listingDataStore.productList;
+    //   // console.log(this.listing);
+    // },
+    //   (error) => { });
     this.store.dispatch(new GetProductList());
   }
 }

@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
-import {
-    HttpEvent, HttpRequest, HttpHandler,
-    HttpInterceptor, HttpErrorResponse
-} from '@angular/common/http';
-import { BehaviorSubject, Observable, ObservableInput, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
-import { UtilityService } from 'src/app/shared/services/utility.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { catchError } from "rxjs";
+import { UtilityService } from "../../services/utility.service";
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {

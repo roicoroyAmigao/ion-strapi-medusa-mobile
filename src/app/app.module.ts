@@ -39,7 +39,7 @@ import { FormComponentsModule } from 'projects/form-components/src/public-api';
 import { ErrorService } from 'projects/services/src/lib/errors/errors/server-error.service';
 import { StrapiAuthInterceptor } from 'projects/services/src/lib/services/strapi.interceptor';
 import { ProductState } from './store/products/products.state';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { CategoriesState } from './store/categories/categories.state';
 
 registerLocaleData(localePT, 'pt');
@@ -113,16 +113,16 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
     NgxStripeModule.forRoot(environment.STRIPE_KEY),
     ReactiveFormsModule,
     FormComponentsModule,
-    ComponentsModule
+    CustomComponentsModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'en' },
-    {
-      provide: ErrorHandler,
-      useClass: ErrorService,
-      multi: false
-    },
+    // {
+    //   provide: ErrorHandler,
+    //   useClass: ErrorService,
+    //   multi: false
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: StrapiAuthInterceptor,

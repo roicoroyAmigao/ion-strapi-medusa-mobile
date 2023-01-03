@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { ComponentsModule } from 'projects/components/src/public-api';
     NgxsFormPluginModule,
     TranslateModule,
     FormComponentsModule,
-    ComponentsModule,
+    CustomComponentsModule,
   ],
   declarations: [TestHomePage]
 })

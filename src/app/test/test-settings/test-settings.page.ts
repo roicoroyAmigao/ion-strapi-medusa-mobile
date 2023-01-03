@@ -1,8 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { ColorsFormComponent } from 'projects/form-components/src/lib/components/colors-form/colors-form.component';
+import { FcmFormComponent } from 'projects/form-components/src/lib/components/fcm-form/fcm-form.component';
+import { LanguageFormComponent } from 'projects/form-components/src/lib/components/language-form/language-form.component';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { Observable } from 'rxjs';
+import { LanguageActions } from 'src/app/store/language/language.actions';
 import { ThemeActions } from 'src/app/store/theme/theme.actions';
 import { TestSettingsFacade } from './test-settings.facade';
 
@@ -12,6 +15,10 @@ import { TestSettingsFacade } from './test-settings.facade';
   styleUrls: ['./test-settings.page.scss'],
 })
 export class TestSettingsPage {
+
+  @ViewChild('fcmForm') fcmForm: FcmFormComponent;
+
+  @ViewChild('languageForm') languageForm: LanguageFormComponent;
 
   @ViewChild('colorsForm') colorsForm: ColorsFormComponent;
 
@@ -23,12 +30,17 @@ export class TestSettingsPage {
     public store: Store,
   ) {
 
-    // this.store.dispatch(new ThemeActions.GetTheme);
+    this.store.dispatch(new ThemeActions.GetTheme);
 
     this.viewState$ = this.facade.viewState$;
-    // this.viewState$.subscribe((vs: any) => {
-    //   console.log(vs);
-    // });
+    this.viewState$.subscribe((vs: any) => {
+      console.log(vs.user.device_token);
+    });
+  }
+
+  ionViewDidEnter() {
+    const stateLanguage = this.store.selectSnapshot<any>((state) => state.language.language);
+    this.languageForm.languageForm.get('language').setValue(stateLanguage);
   }
 
   submitForm() {
@@ -39,7 +51,9 @@ export class TestSettingsPage {
         tertiary: this.colorsForm.tertiary ? this.colorsForm.tertiary : '#5260ff',
       }
     }
-    console.log(theme);
+    // console.log(theme);
+    // console.log(this.fcmForm.fcmForm.value);
+    // this.store.dispatch(new LanguageActions.SetLanguageDeviceInfo(this.languageForm.languageForm.value.language));
     // this.store.dispatch(new ThemeActions.PostUpdateTheme(theme));
   }
 

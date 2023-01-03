@@ -8,12 +8,14 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { PasswordFormComponent } from './components/password-form/password-form.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { ColorsFormComponent } from './components/colors-form/colors-form.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { LanguageFormComponent } from './components/language-form/language-form.component';
+import { FcmFormComponent } from './components/fcm-form/fcm-form.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     NgxsFormPluginModule,
     NgxsStoragePluginModule,
     ReactiveFormsModule,
-    ComponentsModule,
+    CustomComponentsModule,
     ColorPickerModule
   ],
   declarations: [
@@ -35,6 +37,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     LoginFormComponent,
     UserFormComponent,
     ColorsFormComponent,
+    LanguageFormComponent,
+    FcmFormComponent
   ],
   exports: [
     PasswordFormComponent,
@@ -43,6 +47,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     LoginFormComponent,
     UserFormComponent,
     ColorsFormComponent,
+    LanguageFormComponent,
+    FcmFormComponent
   ]
 })
 export class FormComponentsModule { }

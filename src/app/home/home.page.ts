@@ -33,10 +33,10 @@ export class HomePage {
         private store: Store,
     ) {
         this.viewState$ = this.facade.viewState$;
-        this.viewState$.subscribe((state) => {
-            console.log(state);
-            this.categoriesData = state?.categories;
-        });
+        // this.viewState$.subscribe((state) => {
+        //     console.log(state);
+        //     this.categoriesData = state?.categories;
+        // });
     }
     ionViewWillEnter() {
         this.store.dispatch(new CategoriesActions.GetCategories());

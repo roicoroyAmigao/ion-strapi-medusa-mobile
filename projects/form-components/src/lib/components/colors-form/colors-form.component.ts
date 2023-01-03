@@ -79,15 +79,21 @@ export class ColorsFormComponent implements OnInit, OnDestroy {
 
   public capturePrimaryColour(event: any): void {
     this.primary = event;
-    this.primaryRef.nativeElement.style.backgroundColor = this.primary;
+    if (this.primaryRef.nativeElement) {
+      this.primaryRef.nativeElement.style.backgroundColor = this.primary;
+    }
   }
   public captureSecondaryColour(event: any): void {
     this.secondary = event;
-    this.secondaryRef.nativeElement.style.backgroundColor = this.secondary;
+    if (this.secondaryRef.nativeElement) {
+      this.secondaryRef.nativeElement.style.backgroundColor = this.secondary;
+    }
   }
   public captureTertiaryColour(event: any): void {
     this.tertiary = event;
-    this.tertiaryRef.nativeElement.style.backgroundColor = this.tertiary;
+    if (this.tertiaryRef.nativeElement) {
+      this.tertiaryRef.nativeElement.style.backgroundColor = this.tertiary;
+    }
   }
 
   registerOnChange(fn: any) {

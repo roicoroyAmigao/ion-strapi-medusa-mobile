@@ -88,17 +88,15 @@ export class ThemeService {
     }
 
     getAppTheme(): Observable<AppTheme> {
-
-        return this.httpClient.get<AppTheme>(environment.BASE_PATH + '/api/app-infos?populate=*', { headers: this.headers });
+        return this.httpClient.get<AppTheme>(environment.BASE_PATH + '/api/app-theme?populate=*', { headers: this.headers });
     }
-    postAppTheme(id: string, theme: AppTheme): Observable<AppTheme> {
-
-        return this.httpClient.put<AppTheme>(environment.BASE_PATH + '/api/app-infos/' + id, theme, { headers: this.headers });
+    postAppTheme(theme: AppTheme): Observable<AppTheme> {
+        return this.httpClient.put<AppTheme>(environment.BASE_PATH + '/api/app-theme', theme, { headers: this.headers });
     }
     initTheme() {
         const theme: any = firstValueFrom(this.store.dispatch(new ThemeActions.GetTheme()));
         // console.log(theme.theme?.styles);
-        this.store.dispatch(new ThemeActions.GetTheme());
+        // this.store.dispatch(new ThemeActions.GetTheme());
         const styles = this.store.selectSnapshot<any>((state) => state.theme?.styles);
         // console.log('styles', styles);
         this.setTheme(styles);
@@ -106,13 +104,14 @@ export class ThemeService {
 
     setTheme(theme?: AppTheme) {
         const customColors = {
-            primary: `${theme?.primary}`,
-            secondary: `${theme?.secondary}`,
-            tertiary: `${theme?.tertiary}`,
+            primary: theme?.primary != null ? theme?.primary : '#3880ff',
+            secondary: theme?.secondary != null ? theme?.secondary : '#3dc2ff',
+            tertiary: theme?.tertiary != null ? theme?.tertiary : '#5260ff',
         };
         const cssText = CSSTextGenerator(customColors);
         // console.log(cssText)
-        this.setGlobalCSS(cssText);
+        // this.setGlobalCSS(cssText);
+        return this.document.documentElement.style.cssText = cssText;
     }
 
     private setGlobalCSS(css: string) {

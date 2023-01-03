@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { UserPage } from './user.page';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -30,7 +30,7 @@ const routes: Routes = [
     NgxsFormPluginModule,
     TranslateModule,
     FormComponentsModule,
-    ComponentsModule
+    CustomComponentsModule
   ],
   declarations: [UserPage]
 })

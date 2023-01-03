@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { FormComponentsModule } from 'projects/form-components/src/public-api';
     HomePageRoutingModule,
     ReactiveFormsModule,
     FormComponentsModule,
-    ComponentsModule
+    CustomComponentsModule
   ],
   declarations: [
     HomePage

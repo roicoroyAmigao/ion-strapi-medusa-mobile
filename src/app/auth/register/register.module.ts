@@ -12,7 +12,7 @@ import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { UserComponent } from './user/user.component';
 import { AddressComponent } from './address/address.component';
-import { ComponentsModule } from 'projects/components/src/public-api';
+import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { FormComponentsModule } from 'projects/form-components/src/public-api';
     NgxsFormPluginModule,
     NgxsStoragePluginModule,
     FormComponentsModule,
-    ComponentsModule
+    CustomComponentsModule
   ],
   declarations: [
     UserComponent,

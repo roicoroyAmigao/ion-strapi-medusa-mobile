@@ -68,7 +68,7 @@ export class StrapiUserState {
             .subscribe(
                 {
                     next: (v: { user: { id: any; }; jwt: any; }) => {
-                        console.log('v', v);
+                        // console.log('v', v);
                         ctx.patchState({
                             user: v.user,
                             isLoggedIn: true,
@@ -95,7 +95,7 @@ export class StrapiUserState {
         this.strapi.strapiRegister(payload)
             .pipe(
                 catchError((err: HttpErrorResponse) => throwError(() => {
-                    console.log('err0', err);
+                    // console.log('err0', err);
                     this.store.dispatch(new LogErrorEntry(err));
                     return new Error(err.message)
                 })),
@@ -154,14 +154,14 @@ export class StrapiUserState {
                 .subscribe(
                     {
                         next: (loadedUser: any) => {
-                            console.log(loadedUser);
+                            // console.log(loadedUser);
                             ctx.patchState({
                                 ...state,
                                 user: loadedUser,
                             });
                         },
                         error: (e: any) => console.error(e),
-                        complete: () => console.info('complete')
+                        // complete: () => console.info('complete'),
                     }
                 );
         }

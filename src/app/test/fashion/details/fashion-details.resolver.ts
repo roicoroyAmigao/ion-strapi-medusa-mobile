@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 import { FashionService } from '../fashion.service';
-import { FashionDetailsModel } from '../details/fashion-details.model';
+import { FashionDetailsModel } from './fashion-details.model';
 import { Observable } from 'rxjs';
 import { DataStore } from 'projects/components/src/lib/shell/data-store';
 
