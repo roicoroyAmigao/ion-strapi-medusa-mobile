@@ -16,10 +16,6 @@ export class VariantModalComponent {
 
   viewState$: Observable<any>;
 
-  medusaClient: any;
-
-  // private readonly ngUnsubscribe = new Subject();
-
   min = 1;
   max = 10;
   step = 1;
@@ -29,17 +25,12 @@ export class VariantModalComponent {
     return this.counterValue;
   }
 
-  variantsList: any;
-
   constructor(
     private modalCtrl: ModalController,
     private facade: ProductDetailFacade,
     private store: Store,
   ) {
     this.viewState$ = this.facade.viewState$;
-    // this.viewState$.subscribe((vs) => {
-    //   console.log(vs);
-    // });
   }
 
   ionViewWillEnter() {
@@ -74,10 +65,5 @@ export class VariantModalComponent {
   async dismiss() {
     await this.modalCtrl.dismiss();
   }
-
-  // ngOnDestroy(): void {
-  //   this.ngUnsubscribe.next(null);
-  //   this.ngUnsubscribe.complete();
-  // }
 
 }

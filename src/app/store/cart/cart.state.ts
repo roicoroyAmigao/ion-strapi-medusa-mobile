@@ -7,6 +7,7 @@ import { CustomerActions } from "../customer/customer.actions";
 import { LogErrorEntry } from "../errors-logging/errors-logging.actions";
 import { IRegisterAddress } from "../../../../projects/types/types.interfaces";
 import { CartActions } from "./cart.actions";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 export interface CartStateModel {
     cartId: string | any;
@@ -31,6 +32,7 @@ export class CartState {
 
     constructor(
         private store: Store,
+        private http: HttpClient
     ) {
         this.medusaClient = new Medusa({ baseUrl: environment.MEDUSA_API_BASE_PATH, maxRetries: 10 });
     }
@@ -46,7 +48,6 @@ export class CartState {
     async getMedusaCart(ctx: StateContext<CartStateModel>, { cartId }: CartActions.GetMedusaCart) {
         try {
             let cart = await this.medusaClient.carts?.retrieve(cartId);
-            this.store.dispatch(new CustomerActions.GetSession());
             ctx.patchState({
                 cart: cart?.cart,
                 cartId: cart?.cart.id,
@@ -163,6 +164,23 @@ export class CartState {
             }
         }
     }
+    @Action(CartActions.UpdateCartEmail)
+    async updateCartEmail(ctx: StateContext<CartStateModel>, { cartId, email }: CartActions.UpdateCartEmail) {
+        // console.log(email);
+        try {
+            let cartRes = await this.medusaClient.carts.update(cartId, {
+                email: email,
+            });
+            console.log(cartRes);
+            this.store.dispatch(new CartActions.GetMedusaCart(cartId));
+            // this.store.dispatch(new CustomerActions.GetSession());
+        }
+        catch (err: any) {
+            if (err) {
+                this.store.dispatch(new LogErrorEntry(err));
+            }
+        }
+    }
     @Action(CartActions.UpdateCart)
     async updateCart(ctx: StateContext<CartStateModel>, { cartId, customer }: CartActions.UpdateCart) {
         try {
@@ -208,7 +226,6 @@ export class CartState {
         });
         return filtered[0]?.region_id;
     }
-
     @Action(CartActions.AddProductMedusaToCart)
     async addProductMedusaToCart(ctx: StateContext<CartStateModel>, { cartId, quantity, variantId }: CartActions.AddProductMedusaToCart) {
         try {
@@ -281,7 +298,6 @@ export class CartState {
             }
         }
     }
-
     @Action(CartActions.UpdateSelectedRegion)
     async updateselectedRegion(ctx: StateContext<CartStateModel>, { selectedRegion }: CartActions.UpdateSelectedRegion) {
         // console.log(selectedRegion);
@@ -323,8 +339,20 @@ export class CartState {
             }
         }
     }
+    headers_json = new HttpHeaders().set('Content-Type', 'application/json');
+
     @Action(CartActions.LogOut)
-    logout(ctx: StateContext<CartStateModel>) {
+    async logout(ctx: StateContext<CartStateModel>) {
+        console.log(this.medusaClient);
+
+        const res = await this.medusaClient.auth.client.detele;
+        console.log(res);
+
+        this.http.delete(environment.MEDUSA_API_BASE_PATH + '/store/auth', { headers: this.headers_json })
+            .subscribe((res) => {
+                console.log(res);
+            });
+
         return ctx.setState({
             cartId: null,
             cart: null,

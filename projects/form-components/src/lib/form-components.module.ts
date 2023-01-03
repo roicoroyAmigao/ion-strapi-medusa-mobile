@@ -16,6 +16,7 @@ import { ColorsFormComponent } from './components/colors-form/colors-form.compon
 import { ColorPickerModule } from 'ngx-color-picker';
 import { LanguageFormComponent } from './components/language-form/language-form.component';
 import { FcmFormComponent } from './components/fcm-form/fcm-form.component';
+import { GuestFormComponent } from './components/guest-form/guest-form.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { FcmFormComponent } from './components/fcm-form/fcm-form.component';
     UserFormComponent,
     ColorsFormComponent,
     LanguageFormComponent,
-    FcmFormComponent
+    FcmFormComponent,
+    GuestFormComponent
   ],
   exports: [
     PasswordFormComponent,
@@ -48,7 +50,8 @@ import { FcmFormComponent } from './components/fcm-form/fcm-form.component';
     UserFormComponent,
     ColorsFormComponent,
     LanguageFormComponent,
-    FcmFormComponent
+    FcmFormComponent,
+    GuestFormComponent
   ]
 })
 export class FormComponentsModule { }

@@ -15,6 +15,7 @@ import { ShippingComponent } from './shipping/shipping.component';
 import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
 import { CartReviewComponent } from './cart-review/cart-review.component';
+import { GuestComponent } from './guest/guest.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { CartReviewComponent } from './cart-review/cart-review.component';
     StartComponent,
     ShippingComponent,
     PaymentComponent,
-    CartReviewComponent
+    CartReviewComponent,
+    GuestComponent
   ],
   exports: [
     StartComponent,
@@ -43,7 +45,8 @@ import { CartReviewComponent } from './cart-review/cart-review.component';
     PaymentComponent,
     CustomComponentsModule,
     FormComponentsModule,
-    CartReviewComponent
+    CartReviewComponent,
+    GuestComponent
   ]
 })
 export class CheckoutPageModule { }

@@ -41,6 +41,7 @@ import { StrapiAuthInterceptor } from 'projects/services/src/lib/services/strapi
 import { ProductState } from './store/products/products.state';
 import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { CategoriesState } from './store/categories/categories.state';
+import { FcmState } from './store/fcm/fcm.state';
 
 registerLocaleData(localePT, 'pt');
 registerLocaleData(localeEN, 'en');
@@ -85,7 +86,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       StrapiUserState,
       ThemeState,
       LanguageState,
-      CategoriesState
+      CategoriesState,
+      FcmState
     ]),
     NgxsStoragePluginModule.forRoot({
       key: [
@@ -102,7 +104,8 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         'strapiUser',
         'language',
         'theme',
-        "categories"
+        "categories",
+        "fcm"
       ]
     }),
     NgxsFormPluginModule.forRoot(),

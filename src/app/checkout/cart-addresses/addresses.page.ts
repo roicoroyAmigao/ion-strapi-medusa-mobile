@@ -8,6 +8,7 @@ import { IRegisterAddress } from 'projects/types/types.interfaces';
 import { AddressDetailsComponent } from './address-details/address-details.component';
 import { AddressesFacade } from './addresses.facade';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
+import { AddressComponent } from 'src/app/auth/register/address/address.component';
 
 @Component({
   selector: 'app-addresses',
@@ -32,6 +33,9 @@ export class AddressesPage {
   ) {
     this.presentingElement = document.querySelector('#main-content');
     this.viewState$ = this.facade.viewState$;
+    this.viewState$.subscribe((state) => {
+      console.log(state);
+    });
   }
   async updateBillingAddress(address: IRegisterAddress) {
     const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
@@ -50,7 +54,7 @@ export class AddressesPage {
   }
   async newAddress() {
     const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
+      component: AddressComponent,
       componentProps: {
         isNewAddress: true
       }

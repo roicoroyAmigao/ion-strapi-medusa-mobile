@@ -15,8 +15,11 @@ import { UtilityService } from 'projects/services/src/lib/services/utility.servi
   styleUrls: ['./address-details.component.scss'],
 })
 export class AddressDetailsComponent implements OnDestroy {
+
   @ViewChild('form') form: any;
+
   @Input() isNewAddress: boolean;
+
   addressDetailsForm: FormGroup;
 
   regionsList: any = [];

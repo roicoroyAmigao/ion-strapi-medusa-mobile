@@ -26,7 +26,7 @@ export class AddressComponent implements OnDestroy {
   first_name: string;
   last_name: string;
 
-  private readonly ngUnsubscribe = new Subject();
+  // private readonly ngUnsubscribe = new Subject();
 
   constructor(
     private store: Store,
@@ -36,7 +36,7 @@ export class AddressComponent implements OnDestroy {
   ) {
     this.viewState$ = this.facade.viewState$;
     this.viewState$.pipe(
-      takeUntil(this.ngUnsubscribe)
+      // takeUntil(this.ngUnsubscribe)
     ).subscribe((vs) => {
       this.first_name = vs.customer?.first_name;
       this.last_name = vs.customer?.last_name;
@@ -87,7 +87,7 @@ export class AddressComponent implements OnDestroy {
     this.navigation.navigateFlip(AuthRoutePath.user);
   }
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    // this.ngUnsubscribe.next(null);
+    // this.ngUnsubscribe.complete();
   }
 }

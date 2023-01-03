@@ -5,6 +5,7 @@ import { FcmFormComponent } from 'projects/form-components/src/lib/components/fc
 import { LanguageFormComponent } from 'projects/form-components/src/lib/components/language-form/language-form.component';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { Observable } from 'rxjs';
+import { FcmActions } from 'src/app/store/fcm/fcm.actions';
 import { LanguageActions } from 'src/app/store/language/language.actions';
 import { ThemeActions } from 'src/app/store/theme/theme.actions';
 import { TestSettingsFacade } from './test-settings.facade';
@@ -59,6 +60,9 @@ export class TestSettingsPage {
     // console.log(this.fcmForm.fcmForm.value);
     // this.store.dispatch(new LanguageActions.SetLanguageDeviceInfo(this.languageForm.languageForm.value.language));
     // this.store.dispatch(new ThemeActions.PostUpdateTheme(theme));
+
+    this.store.dispatch(new FcmActions.GetFcmToken());
+
   }
 
 }

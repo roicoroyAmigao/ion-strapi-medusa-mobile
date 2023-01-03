@@ -78,7 +78,7 @@ export class ThemeState {
             )
             .subscribe({
                 next: (v: any) => {
-                    console.log('LLLLLLLLL',v);
+                    // console.log('LLLLLLLLL',v);
                     return ctx.patchState({
                         ...state,
                         styles: v.data?.attributes,
@@ -89,7 +89,7 @@ export class ThemeState {
                 },
                 complete: () => {
                     this.themeService.initTheme();
-                    console.info('complete');
+                    // console.info('complete');
                 }
             });
     }
