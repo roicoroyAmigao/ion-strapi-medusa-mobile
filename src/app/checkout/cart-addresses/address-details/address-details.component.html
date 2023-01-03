@@ -1,0 +1,47 @@
+<ion-header [translucent]="true" collapse="condense">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-card-header>
+        <ion-card-subtitle>{{ !isEdit ? 'Add New' : 'Edit' }} </ion-card-subtitle>
+        <ion-card-title>Address</ion-card-title>
+      </ion-card-header>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="addressDetailsForm" ngxsForm="forms.addressDetailsForm">
+
+    <label for="first_name">
+      {{ 'First Name' | translate }}
+    </label>
+    <input formControlName="first_name" id="first_name" type="text" placeholder="First Name" pInputText
+      class="w-full mb-2">
+    <!-- <p-message severity="error" [text]="'First name is required' | translate"
+      *ngIf="!addressDetailsForm.get('first_name')?.valid && addressDetailsForm.get('first_name')?.dirty"></p-message> -->
+
+    <label for="last_name">
+      {{ 'Last Name' | translate }}
+    </label>
+    <input formControlName="last_name" id="last_name" type="text"
+      placeholder="{{ 'Last Name Placeholder' | translate }}" pInputText class="w-full mb-2">
+    <!-- <p-message severity="error" [text]="'Last name is required'"
+      *ngIf="!addressDetailsForm.get('last_name')?.valid && addressDetailsForm.get('last_name')?.dirty"></p-message> -->
+
+    <app-address-form #form formControlName="address"></app-address-form>
+
+  </form>
+</ion-content>
