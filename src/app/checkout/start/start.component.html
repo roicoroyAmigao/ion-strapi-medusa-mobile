@@ -2,50 +2,33 @@
 
 <ion-content>
 
-
-    <!-- <ion-button (click)="openProductsReview()" expand="block" fill="clear" shape="round">
-        Open Products Review Page
-    </ion-button>
-
-    <ion-button (click)="addressesMedusa()" expand="block" fill="clear" shape="round">
-        Manage Addresses
-    </ion-button> -->
-
     <ion-row *ngIf="viewState$ | async as vs">
-        <!-- <ion-col size="12" *ngIf="vs?.isCustomerLoggedIn && vs.isUserLoggedIn; else loggedOut"> -->
-        <ion-col size="12" *ngIf="vs?.isCustomerLoggedIn && vs.isUserLoggedIn">
-            <ion-button (click)="cartReviewMedusa()" expand="block" fill="clear" shape="round">
-                Cart Review
-            </ion-button>
-        </ion-col>
-        <!-- <ng-template #loggedOut> -->
 
-        <!-- <ion-col size="12" *ngIf="vs?.cart?.email === null"> -->
-        <ion-col size="12">
-            <ion-label color="primary">
-                <p> {{ vs?.cart?.email }} </p>
-                Please friend, login or...
-            </ion-label>
+        <ion-col size="12" *ngIf="vs?.isCustomerLoggedIn && vs.isUserLoggedIn; else guest">
+            Strapi and Medusa Logged in, hello:
+            <ion-item>
+                <ion-label>{{ vs.user?.first_name }}</ion-label>
+                <ion-label>{{ vs.customer?.email }}</ion-label>
+            </ion-item>
+        </ion-col>
+        <ng-template #guest>
             <ion-button (click)="continueAsGuest()" expand="block" fill="outline" shape="round">
                 Continue as a Guest
             </ion-button>
-            <ion-button (click)="cartReviewMedusa()" expand="block" fill="clear" shape="round">
+            <ion-button (click)="loginMedusa()" expand="block" fill="outline" shape="round">
+                Login to Medusa (returning customer)
+            </ion-button>
+
+            <ion-button (click)="registerMedusa()" expand="block" fill="outline" shape="round">
+                Register (New Customer)
+            </ion-button>
+        </ng-template>
+
+        <ion-col size="12" *ngIf="vs?.cart !== null">
+            <ion-button (click)="cartReviewMedusa()" expand="block" fill="outline" shape="round">
                 Cart Review
             </ion-button>
         </ion-col>
-
     </ion-row>
-
-    <!-- <ion-button (click)="loginMedusa()" expand="block" fill="clear" shape="round">
-        Login to Medusa (returning customer)
-    </ion-button>
-
-    <ion-button (click)="registerMedusa()" expand="block" fill="clear" shape="round">
-        Register (New Customer)
-    </ion-button> -->
-
-    <!-- <ion-button (click)="checkoutMedusa()" expand="block" fill="clear" shape="round">
-        Proceed to Checkout
-    </ion-button> -->
 
 </ion-content>

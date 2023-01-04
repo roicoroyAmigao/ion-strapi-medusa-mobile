@@ -41,7 +41,7 @@ export interface ProfileFormState {
 export class ProfileFormComponent implements ControlValueAccessor, OnDestroy {
 
   @Input() set profileData(value: ProfileFormValues | any) {
-    console.log(value.user);
+    // console.log(value?.user);
     this._formValues = {
       username: value?.user?.username ? value?.user?.username : '',
       first_name: value?.user?.first_name ? value?.user?.first_name : '',

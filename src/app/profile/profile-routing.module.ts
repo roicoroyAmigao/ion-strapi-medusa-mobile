@@ -6,8 +6,16 @@ import { ProfilePage } from './profile.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
-  }
+    component: ProfilePage,
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./orders/orders.module').then(m => m.OrdersPageModule)
+  },
+  {
+    path: 'customer-addresses',
+    loadChildren: () => import('./customer-addresses/customer-addresses.module').then(m => m.CustomerCartAddressesPageModule)
+  },
 ];
 
 @NgModule({

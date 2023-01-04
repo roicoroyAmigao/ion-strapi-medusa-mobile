@@ -19,7 +19,6 @@ export class AddressComponent implements OnDestroy {
 
   @ViewChild('addressForm') addressForm: AddressFormComponent;
 
-  adressForm: FormGroup | any;
 
   viewState$: Observable<any>;
 

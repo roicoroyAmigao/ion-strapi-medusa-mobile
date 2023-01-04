@@ -36,7 +36,7 @@ export class StartComponent {
     this.navigation.navigateForward('/home', 'back');
   }
   cartReviewMedusa() {
-    this.navigation.navigateForward('/checkout/flow/cart-review', 'forward');
+    this.navigation.navigateFlip('/checkout/flow/cart-review');
   }
   addressesMedusa() {
     this.navigation.navigateForward('/checkout/flow/cart-addresses', 'forward');
@@ -53,14 +53,6 @@ export class StartComponent {
       cssClass: 'guest-modal'
     });
     await modal.present();
-    // const { data, role } = await modal.onDidDismiss();
-    // // .then((res) => {
-    // //   console.log(res);
-    // //   // this.store.dispatch(new clearSelectedVariant());
-    // // });
-    // console.log(data, role);
-
-    // this.navigation.navigateForward('/checkout/flow/guest', 'forward');
   }
   checkoutMedusa() {
     this.navigation.navigateForward('/checkout/flow/shipping', 'forward');

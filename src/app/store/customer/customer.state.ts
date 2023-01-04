@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogErrorEntry } from '../errors-logging/errors-logging.actions';
 import { CustomerActions } from './customer.actions';
 import { ICustomerRegisterData } from 'projects/types/types.interfaces';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 
 export class CustomerStateModel {
     customer: any | any;
@@ -125,8 +125,86 @@ export class CustomerState {
         }
     }
 
+    @Action(CustomerActions.AddAShippingAddress)
+    async addaShippingAddress(ctx: StateContext<CustomerStateModel>, { payload }: CustomerActions.AddAShippingAddress) {
+        try {
+
+            let sessionRes = await this.medusaClient.auth?.getSession();
+            // this.store.dispatch(new CustomerActions.GetSession());
+            // console.log(sessionRes);
+
+            if (sessionRes.response.status === 200) {
+                let customer = await this.medusaClient.customers.addresses.addAddress({
+                    address: {
+                        first_name: payload?.first_name,
+                        last_name: payload?.last_name,
+                        address_1: payload?.address_1,
+                        city: payload?.city,
+                        country_code: payload?.country_code,
+                        postal_code: payload?.postal_code,
+                        phone: payload?.phone,
+                        address_2: payload?.address_2,
+                        province: 'Georgia',
+                        company: 'Wyman LLC',
+                        metadata: {}
+                    }
+                });
+                this.store.dispatch(new CustomerActions.GetSession());
+            }
+        }
+        catch (err: any) {
+            if (err) {
+                this.store.dispatch(new LogErrorEntry(err));
+                const erro: any = {
+                    message: 'you need to login'
+                }
+                this.store.dispatch(new LogErrorEntry(erro));
+            }
+        }
+    }
+    @Action(CustomerActions.UpdateCustomerAddress)
+    async updateCustomerAddress(ctx: StateContext<CustomerStateModel>, { addressId, payload }: CustomerActions.UpdateCustomerAddress) {
+        try {
+            this.store.dispatch(new CustomerActions.GetSession());
+
+            let customer = await this.medusaClient.customers.addresses.updateAddress(addressId, {
+                first_name: payload?.first_name,
+                last_name: payload?.last_name,
+                address_1: payload?.address_1,
+                address_2: payload?.address_2,
+                city: payload?.city,
+                country_code: payload?.country_code,
+                postal_code: payload?.postal_code,
+                phone: payload?.phone,
+            });
+
+            this.store.dispatch(new CustomerActions.GetSession());
+        }
+        catch (err: any) {
+            if (err) {
+                this.store.dispatch(new LogErrorEntry(err));
+            }
+        }
+    }
+    @Action(CustomerActions.DeleteCustomerAddress)
+    async deleteCustomerAddress(ctx: StateContext<CustomerStateModel>, { addressId }: CustomerActions.DeleteCustomerAddress) {
+        try {
+
+            let customer = await this.medusaClient.customers.addresses.deleteAddress(addressId);
+            this.store.dispatch(new CustomerActions.GetSession());
+        }
+        catch (err: any) {
+            if (err) {
+                this.store.dispatch(new LogErrorEntry(err));
+            }
+        }
+    }
     @Action(CustomerActions.LogOutMedusaUser)
-    LogOutMedusaUser(ctx: StateContext<CustomerStateModel>) {
+    async LogOutMedusaUser(ctx: StateContext<CustomerStateModel>) {
+
+        // let sessionRes = await this.medusaClient.auth?.deleteSession();
+        // console.log(sessionRes);
+
         return ctx.patchState({
             customer: null,
             isLoggedIn: false,

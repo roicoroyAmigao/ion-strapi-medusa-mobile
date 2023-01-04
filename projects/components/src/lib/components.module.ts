@@ -20,6 +20,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ImagePickerComponent } from './components/image-picker/image-picker.component';
 import { LanguageComponent } from './components/language-component/language.component';
+import { AddressCardComponent } from './components/address-card/address-card.component';
 
 @NgModule({
     imports: [
@@ -45,7 +46,8 @@ import { LanguageComponent } from './components/language-component/language.comp
     SettingsComponent,
     HeaderComponent,
     ImagePickerComponent,
-    LanguageComponent
+    LanguageComponent,
+    AddressCardComponent
   ],
   exports: [
     ShellModule,
@@ -61,7 +63,8 @@ import { LanguageComponent } from './components/language-component/language.comp
     SettingsComponent,
     HeaderComponent,
     ImagePickerComponent,
-    LanguageComponent
+    LanguageComponent,
+    AddressCardComponent
   ]
 })
 export class CustomComponentsModule { }

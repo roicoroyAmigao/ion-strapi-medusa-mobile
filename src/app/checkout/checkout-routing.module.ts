@@ -6,6 +6,7 @@ import { RoutePath } from './route-path.enum';
 import { ShippingComponent } from './shipping/shipping.component';
 import { CartReviewComponent } from './cart-review/cart-review.component';
 import { GuestComponent } from './guest/guest.component';
+import { AddressDetailsComponent } from './cart-addresses/address-details/address-details.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'cart-addresses',
-        loadChildren: () => import('./cart-addresses/addresses.module').then(m => m.AddressesPageModule)
+        loadChildren: () => import('./cart-addresses/cart-addresses.module').then(m => m.CartAddressesPageModule)
       },
       {
         path: RoutePath.shipping,
@@ -39,6 +40,14 @@ const routes: Routes = [
       {
         path: 'guest',
         component: GuestComponent,
+      },
+      {
+        path: 'address-details',
+        component: AddressDetailsComponent,
+      },
+      {
+        path: 'order-review',
+        loadChildren: () => import('./order-review/order-review.module').then( m => m.OrderReviewPageModule)
       },
     ]
   },

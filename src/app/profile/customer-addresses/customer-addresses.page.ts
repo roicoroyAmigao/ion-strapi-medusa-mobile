@@ -1,0 +1,184 @@
+import { Component, Input, OnDestroy } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { Store } from '@ngxs/store';
+import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { AddressesActions } from 'src/app/store/addresses/addresses.actions';
+import { CartActions } from 'src/app/store/cart/cart.actions';
+import { IRegisterAddress } from 'projects/types/types.interfaces';
+import { AddressDetailsComponent } from './address-details/address-details.component';
+import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
+import { CustomerActions } from 'src/app/store/customer/customer.actions';
+import { CustomerAddressesFacade } from './customer-addresses.facade';
+
+@Component({
+  selector: 'app-customer-addresses',
+  templateUrl: './customer-addresses.page.html',
+  styleUrls: ['./customer-addresses.page.scss'],
+})
+export class CustomerCartAddressesPage implements OnDestroy {
+
+  @Input() isEdit = false;
+
+  presentingElement: any;
+
+  viewState$: Observable<any>;
+
+  submitted: boolean;
+
+  subscription = new Subject();
+
+  constructor(
+    private modalCtrl: ModalController,
+    private store: Store,
+    private navigation: NavigationService,
+    private readonly facade: CustomerAddressesFacade,
+  ) {
+    this.presentingElement = document.querySelector('#main-content');
+    this.viewState$ = this.facade.viewState$;
+    this.viewState$
+      .pipe(
+        takeUntil(this.subscription),
+        take(1)
+      )
+      .subscribe((state) => {
+        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn ) {
+          this.store.dispatch(new CustomerActions.GetSession())
+        }
+      });
+  }
+  async useBillingAddress(address: IRegisterAddress) {
+    const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
+    this.store.dispatch(new CartActions.UpdateCartBillingAddress(cartId, address));
+  }
+  async useShippingAddress(address: IRegisterAddress) {
+    const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
+    this.store.dispatch(new CartActions.UpdateCartShippingAddress(cartId, address));
+  }
+  async newBillingAddress() {
+    // await this.navigation.navigateFlip('/checkout/flow/address-details');
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      componentProps: {
+        isNewAddress: true
+      }
+    });
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    console.log(data, role);
+    if (role === 'dismiss' && data) {
+      this.useBillingAddress(data);
+    }
+  }
+  async viewBilingAddress(address: IRegisterAddress) {
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      presentingElement: this.presentingElement,
+      componentProps: {
+        isNewAddress: false
+      }
+    });
+    this.store.dispatch(new AddressesActions.AddAddressToState(address));
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    console.log(data, role);
+    if (role === 'dismiss' && data) {
+      this.useBillingAddress(data);
+    }
+  }
+
+  async newShippingAddress() {
+    // await this.navigation.navigateFlip('/checkout/flow/address-details');
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      componentProps: {
+        isNewAddress: true
+      }
+    });
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'dismiss' && data) {
+      this.useShippingAddress(data);
+    }
+  }
+  async viewShippingAddress(address?: IRegisterAddress) {
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      presentingElement: this.presentingElement,
+      componentProps: {
+        isNewAddress: false
+      }
+    });
+    this.store.dispatch(new AddressesActions.AddAddressToState(address));
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    console.log(data, role);
+    if (role === 'dismiss' && data) {
+      this.useShippingAddress(data);
+    }
+  }
+  async newCustomerShippingAddress() {
+    // await this.navigation.navigateFlip('/checkout/flow/address-details');
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      componentProps: {
+        isNewAddress: true
+      }
+    });
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'dismiss' && data) {
+      this.useCustomerShippingAddress(data);
+    }
+  }
+  async viewCustomerShippingAddress(address?: any) {
+    const modal = await this.modalCtrl.create({
+      component: AddressDetailsComponent,
+      presentingElement: this.presentingElement,
+      componentProps: {
+        isNewAddress: false
+      }
+    });
+
+    this.store.dispatch(new AddressesActions.AddAddressToState(address));
+
+    await modal.present();
+    const { data, role } = await modal.onWillDismiss();
+    // console.log(data, role);
+    if (role === 'dismiss' && data) {
+      this.updateCustomerShippingAddress(address.id, data);
+    }
+  }
+  async useCustomerShippingAddress(address: IRegisterAddress) {
+    this.store.dispatch(new CustomerActions.AddAShippingAddress(address));
+  }
+  async updateCustomerShippingAddress(addressId: string, address: IRegisterAddress) {
+    this.store.dispatch(new CustomerActions.UpdateCustomerAddress(addressId, address));
+  }
+  async deleteCustomerShippingAddress(addressId: string) {
+    this.store.dispatch(new CustomerActions.DeleteCustomerAddress(addressId));
+  }
+  async navigateBack() {
+
+    this.store.dispatch(new CartActions.ClearIsGuest());
+
+    if (this.isEdit === false) {
+      await this.navigation.navigateFlip('/shop/orders');
+    } else {
+      await this.modalCtrl.dismiss();
+    }
+  }
+  detailsPage() {
+    this.navigation.navigateFlip('/shop/details');
+  }
+  back() {
+    this.navigation.navigateFlip('/checkout/flow/start');
+  }
+  shipping() {
+    this.navigation.navigateFlip('/checkout/flow/shipping');
+  }
+  ngOnDestroy() {
+    this.subscription.next(null);
+    this.subscription.complete();
+    // this.store.dispatch(new CartActions.ClearIsGuest());
+  }
+}

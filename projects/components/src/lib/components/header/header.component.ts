@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    this.auth.logout();
+    this.auth.logoutUser();
   }
 
 }

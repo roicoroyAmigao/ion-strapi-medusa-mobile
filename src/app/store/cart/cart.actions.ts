@@ -22,7 +22,7 @@ export namespace CartActions {
     }
     export class UpdateCartEmail {
         static readonly type = '[CartActions] Update Cart Email';
-        constructor(public cartId: string, public email: string) { }
+        constructor(public cartId: string, public email: string, public isGuest: boolean) { }
     }
     export class UpdateCart {
         static readonly type = '[CartActions] Update Cart';
@@ -58,6 +58,9 @@ export namespace CartActions {
     export class CompleteCart {
         static readonly type = '[CartActions] Complete Cart';
         constructor(public cartId: string | any) { }
+    }
+    export class ClearIsGuest {
+        static readonly type = '[CartActions] Clear Is Guest';
     }
     export class LogOut {
         static readonly type = '[CartActions] Logout';

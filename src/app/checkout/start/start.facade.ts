@@ -20,6 +20,11 @@ export class StartFacade {
 
     @Select(StrapiUserState.getAvatar) avatar$: Observable<any>;
 
+
+    @Select(CustomerState.getCustomer) customer$: Observable<any>;
+
+    @Select(StrapiUserState.getUser) user$: Observable<any>;
+
     readonly viewState$: Observable<any>;
 
     constructor() {
@@ -27,6 +32,8 @@ export class StartFacade {
             [
                 this.cart$,
                 this.isCustomerLoggedIn$,
+                this.user$,
+                this.customer$,
                 this.isUserLoggedIn$,
                 this.avatar$,
             ]
@@ -35,12 +42,16 @@ export class StartFacade {
                 [
                     cart,
                     isCustomerLoggedIn,
+                    user,
+                    customer,
                     isUserLoggedIn,
                     avatar
                 ]
             ) => ({
                 cart,
                 isCustomerLoggedIn,
+                user,
+                customer,
                 isUserLoggedIn,
                 avatar
             }))

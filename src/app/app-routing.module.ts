@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
+    path: 'orders',
+    loadChildren: () => import('./profile/orders/orders.module').then(m => m.OrdersPageModule)
+  },
+  {
     path: 'products-list',
     loadChildren: () => import('./products/products-list/products-list.module').then( m => m.ProductsListPageModule)
   },
@@ -34,6 +38,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutPageModule),
+  },
+  {
+    path: 'address-details-page',
+    loadChildren: () => import('./checkout/cart-addresses/details/details.module').then(m => m.DetailsPageModule)
   },
 ];
 

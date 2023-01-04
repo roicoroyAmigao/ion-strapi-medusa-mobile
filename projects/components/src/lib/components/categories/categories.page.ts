@@ -24,11 +24,11 @@ export class CategoriesPage implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    console.log(this.categoriesData);
+    // console.log(this.categoriesData);
   }
-  ionViewDidEnter() {
-    console.log(this.categoriesData);
-  }
+  // ionViewDidEnter() {
+  //   console.log(this.categoriesData);
+  // }
   navigate(url: string) {
     console.log('navigate', url);
     this.navigation.navigateFlip(url);

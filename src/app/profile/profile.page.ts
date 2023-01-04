@@ -52,5 +52,10 @@ export class ProfilePage implements OnInit {
       }
     }
   }
-
+  ordersPage(){
+    this.navigation.navigateForward('/profile/orders', 'forward');
+  }
+  addressesPage(){
+    this.navigation.navigateForward('/profile/customer-addresses', 'forward');
+  }
 }

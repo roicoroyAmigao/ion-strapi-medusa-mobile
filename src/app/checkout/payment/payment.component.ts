@@ -6,7 +6,6 @@ import { MedusaActions } from 'src/app/store/medusa/medusa.actions';
 import { CartActions } from 'src/app/store/cart/cart.actions';
 import { PaymentFacade } from './payment.facade';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { AddressesActions } from 'src/app/store/addresses/addresses.actions';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { UtilityService } from 'projects/services/src/lib/services/utility.service';
@@ -24,26 +23,16 @@ export class PaymentComponent implements OnDestroy {
 
   elementsOptions: StripeElementsOptions;
 
-
-  medusaClient: any;
-
-  cartId: string;
-
   viewState$: Observable<any>;
 
   constructor(
     private stripeService: StripeService,
     private store: Store,
-    private router: Router,
     private utility: UtilityService,
     private facade: PaymentFacade,
     private navigation: NavigationService,
   ) {
     this.viewState$ = this.facade.viewState$;
-  }
-
-  back() {
-    this.router.navigateByUrl('checkout/flow/shipping');
   }
 
   async confirm() {
@@ -58,20 +47,24 @@ export class PaymentComponent implements OnDestroy {
       }
       if (!result.error) {
         const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
-        this.store.dispatch(new CartActions.CompleteCart(cartId));
 
+        this.store.dispatch(new CartActions.CompleteCart(cartId));
         this.store.dispatch(new MedusaActions.LogOut());
         this.store.dispatch(new CartActions.LogOut());
         this.store.dispatch(new AddressesActions.LogOut());
         this.store.dispatch(new MedusaActions.UnSetSecretKey());
+        this.store.dispatch(new CartActions.ClearIsGuest());
 
-        this.utility.dismissLoading();
-        this.utility.presentAlert('Order Placed!', '/home');
+        this.utility.dismissLoading().then(() => this.navigateToReview());
 
       }
     });
   }
   navigateToReview() {
+    this.navigation.navigateFlip('/checkout/flow/order-review');
+  }
+  back() {
+    this.navigation.navigateFlip('checkout/flow/shipping');
   }
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy() {

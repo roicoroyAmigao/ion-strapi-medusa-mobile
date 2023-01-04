@@ -32,8 +32,8 @@ export class GuestComponent implements OnInit {
   submitForm() {
     if (this.guestForm.guestForm.get('email').valid) {
       const cart = this.store.selectSnapshot<any>((state) => state.cart?.cart);
-
-      this.store.dispatch(new CartActions.UpdateCartEmail(cart.id, this.guestForm.guestForm.get('email').value));
+      const isGuest = true;
+      this.store.dispatch(new CartActions.UpdateCartEmail(cart.id, this.guestForm.guestForm.get('email').value, isGuest));
 
       const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
       if (errorEntry === null) {

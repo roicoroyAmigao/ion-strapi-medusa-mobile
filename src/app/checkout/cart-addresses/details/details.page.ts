@@ -3,10 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngxs/store';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { UtilityService } from 'projects/services/src/lib/services/utility.service';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AddressesActions } from 'src/app/store/addresses/addresses.actions';
 import { CartActions } from 'src/app/store/cart/cart.actions';
 import { FormsActions } from 'src/app/store/forms/forms.actions';
+import { DetailsPageFacade } from './details.facade';
 
 @Component({
   selector: 'app-details',
@@ -23,13 +24,14 @@ export class DetailsPage implements OnDestroy {
   selectedRegion: string;
   address: any;
 
-  private readonly ngUnsubscribe = new Subject();
+  viewState$: Observable<any>;
 
   constructor(
     private navigation: NavigationService,
     private formBuilder: FormBuilder,
     private store: Store,
     private utility: UtilityService,
+    private readonly facade: DetailsPageFacade,
   ) {
     this.addressForm = this.formBuilder.group({
       id: new FormControl('', [Validators.required]),
@@ -46,6 +48,10 @@ export class DetailsPage implements OnDestroy {
         phone: '',
       },
     });
+    this.viewState$ = this.facade.viewState$;
+    // this.viewState$.subscribe((vs) => {
+    //   console.log(vs.selectedAddress);
+    // });
   }
   ionViewWillEnter() {
     // this.populateEditForm();
@@ -89,7 +95,7 @@ export class DetailsPage implements OnDestroy {
     return filtered[0]?.region_id;
   }
   navigateBack() {
-    this.navigation.navigateFlip('/shop/addresses');
+    this.navigation.navigateFlip('/checkout/flow/cart-addresses');
   }
   clearForm() {
     this.addressForm.reset();
@@ -97,8 +103,6 @@ export class DetailsPage implements OnDestroy {
     this.store.dispatch(new AddressesActions.RemoveAddressFromState());
   }
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
     this.clearForm();
   }
 }

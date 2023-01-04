@@ -42,6 +42,7 @@ import { ProductState } from './store/products/products.state';
 import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { CategoriesState } from './store/categories/categories.state';
 import { FcmState } from './store/fcm/fcm.state';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(localePT, 'pt');
 registerLocaleData(localeEN, 'en');
@@ -131,6 +132,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
       useClass: StrapiAuthInterceptor,
       multi: true
     },
+    CookieService
   ],
   bootstrap: [AppComponent],
 })

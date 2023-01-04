@@ -45,7 +45,7 @@ export class ShippingState {
         try {
             const cart = this.store.selectSnapshot<any>((state: any) => state.cart?.cart);
             const shipping_options = await this.medusaClient.shippingOptions.listCartOptions(cart.id);
-            console.log(shipping_options);
+            // console.log(shipping_options);
             return ctx.patchState({
                 shipping_options: shipping_options?.shipping_options
             });
@@ -66,7 +66,7 @@ export class ShippingState {
                 option_id: option_id
             });
             //   console.log(cart);
-            this.store.dispatch(new CustomerActions.GetSession());
+            // this.store.dispatch(new CustomerActions.GetSession());
         }
         catch (err: any) {
             if (err) {
@@ -83,7 +83,7 @@ export class ShippingState {
             ctx.patchState({
                 payment_sessions: cart.cart?.payment_sessions
             });
-            this.store.dispatch(new CustomerActions.GetSession());
+            // this.store.dispatch(new CustomerActions.GetSession());
         }
         catch (err: any) {
             if (err) {
@@ -106,7 +106,7 @@ export class ShippingState {
                 provider_id: cart.cart?.provider_id
             });
 
-            this.store.dispatch(new CustomerActions.GetSession());
+            // this.store.dispatch(new CustomerActions.GetSession());
         }
         catch (err: any) {
             if (err) {

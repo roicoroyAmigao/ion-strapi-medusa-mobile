@@ -8,30 +8,32 @@ import { MedusaActions } from 'src/app/store/medusa/medusa.actions';
 import { StrapiUserActions } from 'src/app/store/strapi-user/strapi-user.actions';
 import { environment } from 'src/environments/environment';
 import { NavigationService } from './navigation.service';
-
+import Medusa from "@medusajs/medusa-js";
 @Injectable({
     providedIn: 'root'
 })
 export class AppAuthService {
     headers_json = new HttpHeaders().set('Content-Type', 'application/json');
+    medusaClient: any;
     constructor(
         private store: Store,
         private navigation: NavigationService,
         private http: HttpClient
-    ) { }
+    ) {
+        this.medusaClient = new Medusa({ baseUrl: environment.MEDUSA_API_BASE_PATH, maxRetries: 10 });
+
+     }
 
     public async logout(): Promise<void> {
-        const deleteReq = this.http.delete(environment.MEDUSA_API_BASE_PATH + '/store/auth', { headers: this.headers_json });
         this.store.dispatch(new CustomerActions.LogOutMedusaUser());
         this.store.dispatch(new MedusaActions.LogOut());
         this.store.dispatch(new CartActions.LogOut());
         this.store.dispatch(new AddressesActions.LogOut());
         this.store.dispatch(new StrapiUserActions.LogOutStrapiUser());
-        // this.store.dispatch(new ProductsLogOut());
-        // this.navigation.navigateForward('/home', 'back');
+        let sessionRes = await this.medusaClient.auth?.deleteSession();
     }
     public async logoutUser(): Promise<void> {
-        const deleteReq = this.http.delete(environment.MEDUSA_API_BASE_PATH + '/store/auth', { headers: this.headers_json });
+        let sessionRes = await this.medusaClient.auth?.deleteSession();
         this.store.dispatch(new CustomerActions.LogOutMedusaUser());
         this.store.dispatch(new MedusaActions.LogOut());
         this.store.dispatch(new StrapiUserActions.LogOutStrapiUser());

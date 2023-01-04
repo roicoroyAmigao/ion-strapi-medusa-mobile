@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import Medusa from "@medusajs/medusa-js";
 import { State, Store, Selector, Action, StateContext } from "@ngxs/store";
+import { CookieService } from "ngx-cookie-service";
 import { environment } from "src/environments/environment";
 import { CustomerActions } from "../customer/customer.actions";
 import { MedusaActions } from "../medusa/medusa.actions";
@@ -66,19 +67,17 @@ export class MedusaState {
             let customer = await this.medusaClient.customers.addresses.updateAddress(addressId, {
                 first_name: payload?.first_name,
                 last_name: payload?.last_name,
-                address_1: payload.address?.address_1,
-                address_2: payload.address?.address_2,
-                city: payload.address?.city,
-                country_code: payload.address?.country,
-                postal_code: payload.address?.postal_code,
-                phone: payload.address?.phone,
+                address_1: payload?.address_1,
+                address_2: payload?.address_2,
+                city: payload?.city,
+                country_code: payload?.country_code,
+                postal_code: payload?.postal_code,
+                phone: payload?.phone,
             });
             this.store.dispatch(new CustomerActions.GetSession());
         }
         catch (err: any) {
             if (err) {
-                ctx.patchState({
-                });
             }
         }
     }

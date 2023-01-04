@@ -42,7 +42,7 @@ export class ThemeState {
             )
             .subscribe({
                 next: (v: any) => {
-                    console.log("theme vvv", v);
+                    // console.log("theme vvv", v);
                     return ctx.patchState({
                         ...state,
                         styles: v.data?.attributes,
@@ -51,7 +51,7 @@ export class ThemeState {
                 error: (e: any) => {
                     console.error(e);
                 },
-                complete: () => console.info('complete')
+                // complete: () => console.info('complete')
             });
     }
 
@@ -67,7 +67,7 @@ export class ThemeState {
     @Action(ThemeActions.PostUpdateTheme)
     postUpdateTheme(ctx: StateContext<ThemeStateModel>, { theme }: ThemeActions.PostUpdateTheme) {
         const state = ctx.getState();
-        console.log(theme);
+        // console.log(theme);
         const lid = '1';
         this.themeService.postAppTheme(theme)
             .pipe(
