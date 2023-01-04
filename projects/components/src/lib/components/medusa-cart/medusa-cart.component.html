@@ -13,12 +13,16 @@
                             <ion-thumbnail slot="start">
                                 <img [src]="item.thumbnail" />
                             </ion-thumbnail>
-                            <ion-text>
-                                {{ item.unit_price | currency:'GBP'}}
-                            </ion-text>
-                            <ion-note slot="end">
-                                {{ item.variant.title }}
-                            </ion-note>
+                            <ion-col size="6">
+                                <ion-text>
+                                    {{ item.unit_price | currency:'GBP'}}
+                                </ion-text>
+                            </ion-col>
+                            <ion-col size="6">
+                                <ion-note>
+                                    {{ item.variant.title }}
+                                </ion-note>
+                            </ion-col>
                         </ion-item>
                         <ion-item>
                             <div class="counter-wrapper">
@@ -38,15 +42,16 @@
                 </ion-card>
             </ion-col>
         </ion-row>
-        <ion-row>
+
+        <ion-row class="ion-text-center">
             <ion-col size="12">
-                <ion-label>Sub total: {{ vs.medusaFullCart?.subtotal | currency:'gbp' }}</ion-label>
+                sub total: {{ vs.cart?.subtotal | currency:'GBP'}}
             </ion-col>
             <ion-col size="12">
-                <ion-label>Tax {{ vs.medusaFullCart?.tax_total | currency:'gbp' }}</ion-label>
+                tax: {{ vs.cart?.tax_total | currency:'GBP'}}
             </ion-col>
             <ion-col size="12">
-                <ion-label>Total {{ vs.medusaFullCart?.total | currency:'gbp' }}</ion-label>
+                cart total: {{ vs.cart?.total | currency:'GBP'}}
             </ion-col>
         </ion-row>
     </ion-grid>

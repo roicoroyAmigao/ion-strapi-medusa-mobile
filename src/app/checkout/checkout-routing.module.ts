@@ -34,7 +34,7 @@ const routes: Routes = [
         component: PaymentComponent,
       },
       {
-        path: 'cart-review',
+        path: RoutePath.cartReview,
         component: CartReviewComponent,
       },
       {

@@ -3,7 +3,6 @@ import Medusa from "@medusajs/medusa-js";
 import { State, Store, Selector, Action, StateContext } from "@ngxs/store";
 import { environment } from "src/environments/environment";
 import { AddressesActions } from "../addresses/addresses.actions";
-import { CustomerActions } from "../customer/customer.actions";
 import { LogErrorEntry } from "../errors-logging/errors-logging.actions";
 import { IRegisterAddress } from "../../../../projects/types/types.interfaces";
 import { CartActions } from "./cart.actions";
@@ -101,7 +100,6 @@ export class CartState {
                 variant_id: selectedVariant?.id,
                 quantity: selectedVariant?.quantity,
             });
-            // this.store.dispatch(new UserActions.GetSession());
             ctx.patchState({
                 cart: cartWithItems?.cart,
                 cartId: cartWithItems?.cart.id,
@@ -118,8 +116,6 @@ export class CartState {
     @Action(CartActions.UpdateCartBillingAddress)
     async updateCartBillingAddress(ctx: StateContext<CartStateModel>, { cartId, address }: CartActions.UpdateCartBillingAddress) {
         try {
-            // const cart = await this.store.selectSnapshot<any>((state: any) => state.cart?.cart);
-            // console.log(cart);
             const editedCustomer: IRegisterAddress = {
                 first_name: address?.first_name,
                 last_name: address?.last_name,
@@ -191,9 +187,6 @@ export class CartState {
                 cart: cartRes?.cart,
                 cartId: cartRes?.cart.id,
             });
-
-            // this.store.dispatch(new CartActions.GetMedusaCart(cartId));
-            // this.store.dispatch(new CustomerActions.GetSession());
         }
         catch (err: any) {
             if (err) {
@@ -203,7 +196,6 @@ export class CartState {
     }
     @Action(CartActions.UpdateCartEmail)
     async updateCartEmail(ctx: StateContext<CartStateModel>, { cartId, email, isGuest }: CartActions.UpdateCartEmail) {
-        // console.log(email);
         try {
             let cartRes = await this.medusaClient.carts.update(cartId, {
                 email: email,
@@ -399,7 +391,6 @@ export class CartState {
 
     @Action(CartActions.LogOut)
     async logout(ctx: StateContext<CartStateModel>) {
-        // console.log(cookie);
         ctx.setState({
             cartId: null,
             cart: null,

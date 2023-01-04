@@ -2,15 +2,10 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="start()">
-        Start
+        <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Cart Review</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="addresses()">
-        <ion-icon slot="start" name="arrow-forward"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -55,7 +50,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row class="ion-text-center">
       <ion-col size="12">
         sub total: {{ vs.cart?.subtotal | currency:'GBP'}}
       </ion-col>
@@ -74,7 +69,7 @@
             <ion-card-subtitle>Saved Items</ion-card-subtitle>
             <ion-icon name="heart"></ion-icon>
           </ion-card-header>
-          <ion-card-content>
+          <ion-card-content class="ion-text-center">
             <ion-item>
               <ion-avatar slot="start">
                 <img [src]="'assets/shapes.svg'" />
@@ -94,8 +89,8 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-button (click)="addresses()" expand="block" fill="clear" shape="round">
-      Proceed ->
+    <ion-button (click)="addresses()" expand="block" fill="solid" shape="round">
+      <ion-icon name="arrow-forward"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-footer>

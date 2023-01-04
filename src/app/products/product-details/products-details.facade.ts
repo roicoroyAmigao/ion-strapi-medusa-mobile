@@ -19,6 +19,8 @@ export class ProductDetailFacade {
 
     @Select(StrapiUserState.isLoggedIn) isUserLoggedIn$: Observable<any>;
 
+    @Select(StrapiUserState.getAvatar) avatar$: Observable<any>;
+
     readonly viewState$: Observable<any>;
 
     constructor() {
@@ -28,6 +30,7 @@ export class ProductDetailFacade {
                 this.selectedProduct$,
                 this.isCustomerLoggedIn$,
                 this.isUserLoggedIn$,
+                this.avatar$,
             ]
         ).pipe(
             map((
@@ -36,12 +39,14 @@ export class ProductDetailFacade {
                     selectedProduct,
                     isCustomerLoggedIn,
                     isUserLoggedIn,
+                    avatar,
                 ]
             ) => ({
                 selectedVariant,
                 selectedProduct,
                 isCustomerLoggedIn,
-                    isUserLoggedIn,
+                isUserLoggedIn,
+                avatar,
             }))
         );
     }

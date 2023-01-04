@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartState } from 'src/app/store/cart/cart.state';
@@ -9,7 +9,7 @@ import { StrapiUserState } from 'src/app/store/strapi-user/strapi-user.state';
 @Injectable({
     providedIn: 'root'
 })
-export class CustomerAddressesFacade {
+export class CutomerAddressDetailsFacade {
 
     @Select(CartState.getIsGuest) isGuest$: Observable<any>;
 
@@ -29,9 +29,7 @@ export class CustomerAddressesFacade {
 
     readonly viewState$: Observable<any>;
 
-    constructor(
-        private store: Store,
-    ) {
+    constructor() {
         this.viewState$ = combineLatest(
             [
                 this.isCustomerLoggedIn$,

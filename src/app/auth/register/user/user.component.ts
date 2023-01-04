@@ -62,22 +62,22 @@ export class UserComponent {
       email: this.userForm.userForm.get('email').value,
       password: this.userForm.userForm.get('matching_passwords').get('password').value,
     };
-    const medusaRequest: ICustomerLoginData = {
-      // email: this.form?.loginForm.get('email').value,
-      email: "roicoroy@test.com",
-      password: "Rwbento123"
-    }
+    // const medusaRequest: ICustomerLoginData = {
+    //   // email: this.form?.loginForm.get('email').value,
+    //   email: "roicoroy@test.com",
+    //   password: "Rwbento123"
+    // }
     // console.log(strapiRegisterRequest, customerRegisterRequest, strapiLoginRequest, medusaLoginRequest);
     if (this.userForm.userForm.valid) {
-      // this.store.dispatch(new StrapiUserActions.StrapiRegister(strapiRegisterRequest));
-      // this.store.dispatch(new CustomerActions.Register(customerRegisterRequest));
+      this.store.dispatch(new StrapiUserActions.StrapiRegister(strapiRegisterRequest));
+      this.store.dispatch(new CustomerActions.Register(customerRegisterRequest));
 
       setTimeout(() => {
         const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
         if (errorEntry === null) {
-          // this.store.dispatch(new StrapiUserActions.StrapiLogin(strapiLoginRequest));
-          this.store.dispatch(new CustomerActions.Login(medusaRequest));
-          // this.address();
+          this.store.dispatch(new StrapiUserActions.StrapiLogin(strapiLoginRequest));
+          this.store.dispatch(new CustomerActions.Login(medusaLoginRequest));
+          this.address();
         }
       }, 100);
     }

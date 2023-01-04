@@ -1,6 +1,7 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { CounterInputComponent } from 'projects/components/src/lib/components/counter-input/counter-input.component';
 import { Observable, Subject } from 'rxjs';
 import { CartActions } from 'src/app/store/cart/cart.actions';
 import { ProductDetailFacade } from '../product-details/products-details.facade';
@@ -11,6 +12,8 @@ import { ProductDetailFacade } from '../product-details/products-details.facade'
   styleUrls: ['./variant-modal.component.scss'],
 })
 export class VariantModalComponent {
+
+  @ViewChild('counterInput') counterInput: CounterInputComponent;
 
   @Input() variant: any;
 
@@ -40,25 +43,13 @@ export class VariantModalComponent {
   addToCart() {
     const cartId = this.store.selectSnapshot<any>((state) => state.cart?.cartId);
     if (cartId != null && this.variant != null) {
-      this.store.dispatch(new CartActions.AddProductMedusaToCart(cartId, this.counterValue, this.variant?.id));
+      this.store.dispatch(new CartActions.AddProductMedusaToCart(cartId, this.counterInput.counterValue, this.variant?.id));
       this.dismiss();
     } else {
       this.store.dispatch(new CartActions.CreateMedusaCart()).subscribe((state) => {
-        this.store.dispatch(new CartActions.AddProductMedusaToCart(state.cart?.cartId, this.counterValue, this.variant?.id));
+        this.store.dispatch(new CartActions.AddProductMedusaToCart(state.cart?.cartId, this.counterInput.counterValue, this.variant?.id));
         this.dismiss();
       });
-    }
-  }
-
-  increment() {
-    if (this.counterValue < this.max) {
-      this.counterValue = this.counterValue + this.step;
-    }
-  }
-
-  decrement() {
-    if (this.counterValue > this.min) {
-      this.counterValue = this.counterValue - this.step;
     }
   }
 

@@ -41,18 +41,27 @@ export class CartAddressesPage implements OnDestroy {
         take(1)
       )
       .subscribe((state) => {
-        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn ) {
-          this.store.dispatch(new CustomerActions.GetSession())
+        // console.log(state);
+        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn) {
+          this.store.dispatch(new CustomerActions.GetSession());
         }
       });
   }
+
+  updateCart(vs: any) {
+    console.log(vs.session.id);
+    this.store.dispatch(new CustomerActions.AddCustomerToCart(vs.session.id))
+  }
+
   async useBillingAddress(address: IRegisterAddress) {
     const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
     this.store.dispatch(new CartActions.UpdateCartBillingAddress(cartId, address));
+    this.store.dispatch(new CustomerActions.AddAShippingAddress(address));
   }
   async useShippingAddress(address: IRegisterAddress) {
     const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
     this.store.dispatch(new CartActions.UpdateCartShippingAddress(cartId, address));
+    this.store.dispatch(new CustomerActions.AddAShippingAddress(address));
   }
   async newBillingAddress() {
     // await this.navigation.navigateFlip('/checkout/flow/address-details');
@@ -85,7 +94,6 @@ export class CartAddressesPage implements OnDestroy {
       this.useBillingAddress(data);
     }
   }
-
   async newShippingAddress() {
     // await this.navigation.navigateFlip('/checkout/flow/address-details');
     const modal = await this.modalCtrl.create({
@@ -117,7 +125,6 @@ export class CartAddressesPage implements OnDestroy {
     }
   }
   async newCustomerShippingAddress() {
-    // await this.navigation.navigateFlip('/checkout/flow/address-details');
     const modal = await this.modalCtrl.create({
       component: AddressDetailsComponent,
       componentProps: {
@@ -179,6 +186,5 @@ export class CartAddressesPage implements OnDestroy {
   ngOnDestroy() {
     this.subscription.next(null);
     this.subscription.complete();
-    // this.store.dispatch(new CartActions.ClearIsGuest());
   }
 }

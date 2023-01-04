@@ -5,6 +5,7 @@ import { GuestFormComponent } from 'projects/form-components/src/lib/components/
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { Observable } from 'rxjs';
 import { CartActions } from 'src/app/store/cart/cart.actions';
+import { RoutePath } from '../route-path.enum';
 import { GuestFacade } from './guest.facade';
 
 @Component({
@@ -38,12 +39,13 @@ export class GuestComponent implements OnInit {
       const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
       if (errorEntry === null) {
         this.modalCtrl.dismiss();
+        this.navigation.navControllerDefault(RoutePath.cartReview);
       }
     }
   }
 
   back() {
-    this.navigation.navControllerDefault('checkout/flow/start');
+    this.navigation.navControllerDefault(RoutePath.start);
   }
 
   async dismiss(email: string) {

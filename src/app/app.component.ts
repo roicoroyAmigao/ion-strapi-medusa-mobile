@@ -43,8 +43,8 @@ export class AppComponent {
       // this.viewState$.subscribe((state: any) => {
       //   console.log(state);
       // });
-      // this.ionLanguageService.initTranslate();
-      // this.theme.initTheme();
+      this.ionLanguageService.initTranslate();
+      this.theme.initTheme();
     });
   }
   checkout() {

@@ -41,9 +41,6 @@ export class ProductsListPage implements OnInit {
       cssClass: 'dialog-modal'
     });
     await modal.present();
-    await modal.onDidDismiss().then(() => {
-      // this.store.dispatch(new clearSelectedVariant());
-    });
   }
   navigateDetails(product: any) {
     // this.store.dispatch(new clearSelectedProduct());

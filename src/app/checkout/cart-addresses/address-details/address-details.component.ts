@@ -43,6 +43,7 @@ export class AddressDetailsComponent implements OnDestroy {
   ionViewWillEnter() {
     this.viewState$
       .subscribe((vs) => {
+        // console.log(vs.selectedAddress);
         return !this.isNewAddress ? this.populateEditForm(vs.selectedAddress) : this.clearForm();
       });
   }

@@ -4,23 +4,20 @@ import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
 import { Observable, Subject } from 'rxjs';
 import { AddressesActions } from 'src/app/store/addresses/addresses.actions';
-import { FormsActions } from 'src/app/store/forms/forms.actions';
-import { MedusaActions } from 'src/app/store/medusa/medusa.actions';
+
 import { IRegisterAddress } from 'projects/types/types.interfaces';
 import { UtilityService } from 'projects/services/src/lib/services/utility.service';
-import { AddressFormComponent } from 'projects/form-components/src/lib/components/address-form/address-form.component';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
-import { AddressDetailsFacade } from './address-details.facade';
-import { CartActions } from 'src/app/store/cart/cart.actions';
+import { AddressDetailsFacade } from './customer-address-details.facade';
 import { AddressDetailsFormComponent } from 'projects/form-components/src/lib/components/address-details-form /address-details-form.component';
 
 @Component({
-  selector: 'app-address-details',
-  templateUrl: './address-details.component.html',
-  styleUrls: ['./address-details.component.scss'],
+  selector: 'app-customer-address-details',
+  templateUrl: './customer-address-details.component.html',
+  styleUrls: ['./customer-address-details.component.scss'],
   providers: [FormGroupDirective]
 })
-export class AddressDetailsComponent implements OnDestroy {
+export class CustomerAddressDetailsComponent implements OnDestroy {
 
   @Input() isNewAddress: boolean;
 

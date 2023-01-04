@@ -49,8 +49,6 @@ export class CustomerRegisterState {
 
     @Action(CustomerRegisterActions.AddaShippingAddress)
     async addaShippingAddress(ctx: StateContext<CustomerRegisterStateModel>, { payload }: CustomerRegisterActions.AddaShippingAddress) {
-        // console.log(payload);
-
         try {
             let customer = await this.medusaClient.customers.addresses.addAddress({
                 address: {
@@ -92,7 +90,6 @@ export class CustomerRegisterState {
                     company: 'Wyman LLC',
                 }
             });
-            // console.log(customer);
             this.store.dispatch(new CustomerActions.GetSession());
         } catch (err: any) {
             if (err) {

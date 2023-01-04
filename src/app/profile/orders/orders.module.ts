@@ -10,8 +10,6 @@ import { OrdersPage } from './orders.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { OrderDetailsComponent } from './order-details/order-details.component';
-
 
 @NgModule({
   imports: [
@@ -26,7 +24,6 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
   ],
   declarations: [
     OrdersPage,
-    OrderDetailsComponent,
   ]
 })
 export class OrdersPageModule { }

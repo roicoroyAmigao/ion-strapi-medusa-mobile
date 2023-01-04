@@ -8,7 +8,6 @@ import { AuthRoutePath } from 'src/app/auth/route-path.enum';
 export interface IHeaderData {
   avatar: string,
 }
-
 @Component({
   selector: 'lib-header',
   templateUrl: './header.component.html',

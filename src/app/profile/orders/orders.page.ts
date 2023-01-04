@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
+import { OrderDetailsComponent } from 'projects/components/src/lib/components/order-details/order-details.component';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { Observable } from 'rxjs';
 import { CustomerActions } from 'src/app/store/customer/customer.actions';
-import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersFacade } from './orders.facade';
 
 @Component({

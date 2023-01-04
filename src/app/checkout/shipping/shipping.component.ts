@@ -4,6 +4,7 @@ import { Store } from "@ngxs/store";
 import { NavigationService } from "projects/services/src/lib/services/navigation.service";
 import { Observable } from "rxjs";
 import { ShippingActions } from "src/app/store/shipping/shipping.actions";
+import { RoutePath } from "../route-path.enum";
 import { ShippingFacade } from "./shippping.facade";
 
 @Component({
@@ -42,12 +43,12 @@ export class ShippingComponent {
   }
 
   async openPaymentPage() {
-    this.router.navigateByUrl('checkout/flow/payment');
+    this.router.navigateByUrl('/checkout/flow/payment');
   }
   back() {
-    this.router.navigateByUrl('checkout/flow/cart-addresses');
+    this.router.navigateByUrl(RoutePath.cartAddresses);
   }
   navigateToPayment() {
-    this.router.navigateByUrl('checkout/flow/payment');
+    this.router.navigateByUrl(RoutePath.payment);
   }
 }

@@ -25,6 +25,10 @@ export namespace CustomerActions {
         static readonly type = '[CustomerActions] Delete Customer Address';
         constructor(public addressId: string) { }
     }
+    export class AddCustomerToCart {
+        static readonly type = '[CustomerActions] Add Customer To Cart';
+        constructor(public customerId: string) { }
+    }
     export class LogOutMedusaUser {
         static readonly type = '[CustomerActions] Logout Medusa clear state User';
     }

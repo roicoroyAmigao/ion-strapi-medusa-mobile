@@ -1,21 +1,21 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Store } from '@ngxs/store';
-import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
+import { IRegisterAddress } from 'projects/types/types.interfaces';
+import { Observable, Subject, takeUntil, take } from 'rxjs';
 import { AddressesActions } from 'src/app/store/addresses/addresses.actions';
 import { CartActions } from 'src/app/store/cart/cart.actions';
-import { IRegisterAddress } from 'projects/types/types.interfaces';
-import { AddressDetailsComponent } from './address-details/address-details.component';
-import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
 import { CustomerActions } from 'src/app/store/customer/customer.actions';
-import { CustomerAddressesFacade } from './customer-addresses.facade';
+import { CustomerAddressDetailsComponent } from './customer-address-details/customer-address-details.component';
+import { CutomerAddressDetailsFacade } from './customer-addresses.facade';
 
 @Component({
   selector: 'app-customer-addresses',
   templateUrl: './customer-addresses.page.html',
   styleUrls: ['./customer-addresses.page.scss'],
 })
-export class CustomerCartAddressesPage implements OnDestroy {
+export class CustomerAddressesPage implements OnDestroy {
 
   @Input() isEdit = false;
 
@@ -31,7 +31,7 @@ export class CustomerCartAddressesPage implements OnDestroy {
     private modalCtrl: ModalController,
     private store: Store,
     private navigation: NavigationService,
-    private readonly facade: CustomerAddressesFacade,
+    private readonly facade: CutomerAddressDetailsFacade,
   ) {
     this.presentingElement = document.querySelector('#main-content');
     this.viewState$ = this.facade.viewState$;
@@ -41,7 +41,8 @@ export class CustomerCartAddressesPage implements OnDestroy {
         take(1)
       )
       .subscribe((state) => {
-        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn ) {
+        console.log(state);
+        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn) {
           this.store.dispatch(new CustomerActions.GetSession())
         }
       });
@@ -54,72 +55,9 @@ export class CustomerCartAddressesPage implements OnDestroy {
     const cartId = await this.store.selectSnapshot<any>((state: any) => state.cart?.cartId);
     this.store.dispatch(new CartActions.UpdateCartShippingAddress(cartId, address));
   }
-  async newBillingAddress() {
-    // await this.navigation.navigateFlip('/checkout/flow/address-details');
-    const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
-      componentProps: {
-        isNewAddress: true
-      }
-    });
-    await modal.present();
-    const { data, role } = await modal.onWillDismiss();
-    console.log(data, role);
-    if (role === 'dismiss' && data) {
-      this.useBillingAddress(data);
-    }
-  }
-  async viewBilingAddress(address: IRegisterAddress) {
-    const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
-      presentingElement: this.presentingElement,
-      componentProps: {
-        isNewAddress: false
-      }
-    });
-    this.store.dispatch(new AddressesActions.AddAddressToState(address));
-    await modal.present();
-    const { data, role } = await modal.onWillDismiss();
-    console.log(data, role);
-    if (role === 'dismiss' && data) {
-      this.useBillingAddress(data);
-    }
-  }
-
-  async newShippingAddress() {
-    // await this.navigation.navigateFlip('/checkout/flow/address-details');
-    const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
-      componentProps: {
-        isNewAddress: true
-      }
-    });
-    await modal.present();
-    const { data, role } = await modal.onWillDismiss();
-    if (role === 'dismiss' && data) {
-      this.useShippingAddress(data);
-    }
-  }
-  async viewShippingAddress(address?: IRegisterAddress) {
-    const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
-      presentingElement: this.presentingElement,
-      componentProps: {
-        isNewAddress: false
-      }
-    });
-    this.store.dispatch(new AddressesActions.AddAddressToState(address));
-    await modal.present();
-    const { data, role } = await modal.onWillDismiss();
-    console.log(data, role);
-    if (role === 'dismiss' && data) {
-      this.useShippingAddress(data);
-    }
-  }
   async newCustomerShippingAddress() {
-    // await this.navigation.navigateFlip('/checkout/flow/address-details');
     const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
+      component: CustomerAddressDetailsComponent,
       componentProps: {
         isNewAddress: true
       }
@@ -132,7 +70,7 @@ export class CustomerCartAddressesPage implements OnDestroy {
   }
   async viewCustomerShippingAddress(address?: any) {
     const modal = await this.modalCtrl.create({
-      component: AddressDetailsComponent,
+      component: CustomerAddressDetailsComponent,
       presentingElement: this.presentingElement,
       componentProps: {
         isNewAddress: false
@@ -143,7 +81,6 @@ export class CustomerCartAddressesPage implements OnDestroy {
 
     await modal.present();
     const { data, role } = await modal.onWillDismiss();
-    // console.log(data, role);
     if (role === 'dismiss' && data) {
       this.updateCustomerShippingAddress(address.id, data);
     }
@@ -158,27 +95,15 @@ export class CustomerCartAddressesPage implements OnDestroy {
     this.store.dispatch(new CustomerActions.DeleteCustomerAddress(addressId));
   }
   async navigateBack() {
-
     this.store.dispatch(new CartActions.ClearIsGuest());
-
-    if (this.isEdit === false) {
-      await this.navigation.navigateFlip('/shop/orders');
-    } else {
-      await this.modalCtrl.dismiss();
-    }
+    await this.navigation.navigateFlip('/profile');
   }
   detailsPage() {
     this.navigation.navigateFlip('/shop/details');
   }
-  back() {
-    this.navigation.navigateFlip('/checkout/flow/start');
-  }
-  shipping() {
-    this.navigation.navigateFlip('/checkout/flow/shipping');
-  }
   ngOnDestroy() {
     this.subscription.next(null);
     this.subscription.complete();
-    // this.store.dispatch(new CartActions.ClearIsGuest());
   }
+
 }

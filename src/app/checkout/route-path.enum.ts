@@ -4,6 +4,8 @@ export enum RoutePath {
   region = 'region',
   delivery = 'delivery',
   shipping = 'shipping',
+  cartReview = 'cart-review',
+  cartAddresses = 'cart-addresses',
   payment = 'payment',
   review = 'review'
 }

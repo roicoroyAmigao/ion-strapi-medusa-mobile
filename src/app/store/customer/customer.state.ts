@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogErrorEntry } from '../errors-logging/errors-logging.actions';
 import { CustomerActions } from './customer.actions';
 import { ICustomerRegisterData } from 'projects/types/types.interfaces';
-import { lastValueFrom, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export class CustomerStateModel {
     customer: any | any;
@@ -124,15 +124,11 @@ export class CustomerState {
             }
         }
     }
-
     @Action(CustomerActions.AddAShippingAddress)
     async addaShippingAddress(ctx: StateContext<CustomerStateModel>, { payload }: CustomerActions.AddAShippingAddress) {
         try {
 
             let sessionRes = await this.medusaClient.auth?.getSession();
-            // this.store.dispatch(new CustomerActions.GetSession());
-            // console.log(sessionRes);
-
             if (sessionRes.response.status === 200) {
                 let customer = await this.medusaClient.customers.addresses.addAddress({
                     address: {
@@ -199,12 +195,27 @@ export class CustomerState {
             }
         }
     }
+
+    @Action(CustomerActions.AddCustomerToCart)
+    async updateCart(ctx: StateContext<CustomerStateModel>, { customerId }: CustomerActions.AddCustomerToCart) {
+        try {
+            const cart = await this.store.selectSnapshot<any>((state: any) => state.cart?.cart);
+            let cartRes = await this.medusaClient.carts.update(cart?.id, {
+                customer_id: customerId,
+            });
+            console.log(cartRes);
+            ;
+            this.store.dispatch(new CustomerActions.GetSession());
+        }
+        catch (err: any) {
+            if (err) {
+                this.store.dispatch(new LogErrorEntry(err));
+            }
+        }
+    }
+
     @Action(CustomerActions.LogOutMedusaUser)
     async LogOutMedusaUser(ctx: StateContext<CustomerStateModel>) {
-
-        // let sessionRes = await this.medusaClient.auth?.deleteSession();
-        // console.log(sessionRes);
-
         return ctx.patchState({
             customer: null,
             isLoggedIn: false,
