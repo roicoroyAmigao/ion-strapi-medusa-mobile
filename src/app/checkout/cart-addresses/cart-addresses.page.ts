@@ -42,15 +42,17 @@ export class CartAddressesPage implements OnDestroy {
       )
       .subscribe((state) => {
         // console.log(state);
-        if (!state.isGuest && state.isCustomerLoggedIn && state.isUserLoggedIn) {
+        if (!state.isGuest && state?.isCustomerLoggedIn && state?.isUserLoggedIn) {
           this.store.dispatch(new CustomerActions.GetSession());
         }
       });
   }
 
   updateCart(vs: any) {
-    console.log(vs.session.id);
-    this.store.dispatch(new CustomerActions.AddCustomerToCart(vs.session.id))
+    // console.log(vs.session?.id);
+    if (vs.session != null) {
+      this.store.dispatch(new CustomerActions.AddCustomerToCart(vs.session?.id))
+    }
   }
 
   async useBillingAddress(address: IRegisterAddress) {

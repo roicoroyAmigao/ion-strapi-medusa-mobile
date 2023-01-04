@@ -26,6 +26,10 @@ export class ProfilePage {
     // this.viewState$.subscribe((state) => {
     //   console.log(state);
     // });
+    // this.profileForm.profileForm?.values.valueChanges.subscribe((x: any) => {
+    //   console.log('form value changed')
+    //   console.log(x)
+    // })
   }
   submitProfileForm() {
     if (this.profileForm.profileForm.valid) {
