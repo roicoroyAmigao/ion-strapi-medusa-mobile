@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-button (click)="back()">
-                <ion-icon slot="start" name="arrow-back"></ion-icon>
+                <ion-icon name="arrow-back"></ion-icon>
             </ion-button>
         </ion-buttons>
         <ion-title>Medusa Customer</ion-title>
@@ -12,16 +12,11 @@
 <ion-content *ngIf="viewState$ | async as vs">
     <ion-grid>
         <ion-row>
-            <h1>Medusa Customer Profile</h1>
-        </ion-row>
-        <ion-row>
             <ion-col size="12">
                 <ion-list>
-
                     <ion-list-header>
                         <ion-label>User Information</ion-label>
                     </ion-list-header>
-
                     <ion-item>
                         <ion-row>
                             <ion-col size="12">
@@ -43,7 +38,7 @@
 
                     <ion-item *ngFor="let order of vs.session?.orders">
                         <ion-button (click)="openOrderDetails(order.id)" expand="block" fill="clear" shape="round">
-                            {{ order.id }}
+                            {{ order.created_at | date }}
                         </ion-button>
                     </ion-item>
 

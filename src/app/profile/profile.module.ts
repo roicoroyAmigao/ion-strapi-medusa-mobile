@@ -25,6 +25,8 @@ import { NgxsModule } from '@ngxs/store';
     FormComponentsModule,
     CustomComponentsModule
   ],
-  declarations: [ProfilePage]
+  declarations: [
+    ProfilePage
+  ]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }

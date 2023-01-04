@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { ProfileFormComponent } from 'projects/form-components/src/lib/components/profile-form/profile-form.component';
 import { NavigationService } from 'projects/services/src/lib/services/navigation.service';
@@ -11,7 +11,7 @@ import { ProfileFacade } from './profile.facade';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
   @ViewChild('profileForm') profileForm: ProfileFormComponent;
 
@@ -27,12 +27,7 @@ export class ProfilePage implements OnInit {
     //   console.log(state);
     // });
   }
-
-  ngOnInit() {
-  }
-
   submitProfileForm() {
-    // console.log(this.profileForm.profileForm);
     if (this.profileForm.profileForm.valid) {
       const postProfileData = {
         username: this.profileForm.profileForm.value.username,
@@ -41,10 +36,7 @@ export class ProfilePage implements OnInit {
         email: this.profileForm.profileForm.value.email,
         phone: this.profileForm.profileForm.value.phone,
       };
-      // console.log(postProfileData);
       this.store.dispatch(new StrapiUserActions.UpdateStrapiUser(postProfileData));
-
-      // this.profileForm.submitForm();
       const formData: FormData = this.profileForm.profileForm.get('avatar').value;
       if (this.profileForm.profileForm.value.avatar) {
         console.log(formData);
@@ -52,10 +44,10 @@ export class ProfilePage implements OnInit {
       }
     }
   }
-  ordersPage(){
+  ordersPage() {
     this.navigation.navigateForward('/profile/orders', 'forward');
   }
-  addressesPage(){
+  addressesPage() {
     this.navigation.navigateForward('/profile/customer-addresses', 'forward');
   }
 }

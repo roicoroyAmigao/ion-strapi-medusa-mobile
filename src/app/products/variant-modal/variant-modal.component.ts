@@ -19,25 +19,12 @@ export class VariantModalComponent {
 
   viewState$: Observable<any>;
 
-  min = 1;
-  max = 10;
-  step = 1;
-
-  counterValue: number | any;
-  get counter() {
-    return this.counterValue;
-  }
-
   constructor(
     private modalCtrl: ModalController,
     private facade: ProductDetailFacade,
     private store: Store,
   ) {
     this.viewState$ = this.facade.viewState$;
-  }
-
-  ionViewWillEnter() {
-    this.counterValue = this.min;
   }
 
   addToCart() {
