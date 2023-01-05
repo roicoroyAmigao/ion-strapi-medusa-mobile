@@ -46,9 +46,6 @@ export class FcmState {
                 error: (e: any) => {
                     console.error(e);
                 },
-                complete: () => {
-                    // console.info('complete');
-                }
             });
     }
 

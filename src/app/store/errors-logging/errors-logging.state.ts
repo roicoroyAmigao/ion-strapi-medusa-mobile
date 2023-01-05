@@ -26,14 +26,12 @@ export class ErrorsLoggingStateModule {
         if (error.message) {
             this.presentErrorAlert(error.message);
         }
-        // console.log('error', error);
         ctx.patchState({
             errorEntry: error,
         });
     }
     @Action(ClearErrorEntry)
     clearErrprEntry(ctx: StateContext<unknown>): void {
-        // console.log('clear');
         ctx.patchState({
             errorEntry: null,
         });

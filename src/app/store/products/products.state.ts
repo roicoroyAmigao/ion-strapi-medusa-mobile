@@ -59,28 +59,24 @@ export class ProductState {
     }
     @Action(addSelectedProduct)
     addProductToState(ctx: StateContext<ProductStateModel>, { payload }: addSelectedProduct) {
-        // console.log('selectedProduct', payload);
         ctx.patchState({
             selectedProduct: payload,
         });
     }
     @Action(clearSelectedProduct)
     clearProductFromState(ctx: StateContext<ProductStateModel>): void {
-        // console.log('clear selectedProduct');
         ctx.patchState({
             selectedProduct: null,
         });
     }
     @Action(addSelectedVariant)
     addVariantToState(ctx: StateContext<ProductStateModel>, { payload }: addSelectedVariant) {
-        // console.log(payload);
         ctx.patchState({
             selectedVariant: payload,
         });
     }
     @Action(clearSelectedVariant)
     clearVariantFromState(ctx: StateContext<ProductStateModel>) {
-        // console.log('selectedVariant: null');
         ctx.patchState({
             selectedVariant: null,
         });

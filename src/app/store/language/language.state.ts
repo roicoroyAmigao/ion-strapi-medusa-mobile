@@ -21,9 +21,7 @@ export class LanguageState {
 
     constructor(
         public translate: TranslateService
-    ) {
-
-    }
+    ) { }
 
     @Selector()
     static getLanguage(state: LanguageStateModel) {

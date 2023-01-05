@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 import { FcmActions } from 'src/app/store/fcm/fcm.actions';
 import { LanguageActions } from 'src/app/store/language/language.actions';
 import { ThemeActions } from 'src/app/store/theme/theme.actions';
-import { TestSettingsFacade } from './test-settings.facade';
+import { TestSettingsFacade } from './settings.facade';
 
 @Component({
-  selector: 'app-test-settings',
-  templateUrl: './test-settings.page.html',
-  styleUrls: ['./test-settings.page.scss'],
+  selector: 'app-settings',
+  templateUrl: './settings.page.html',
+  styleUrls: ['./settings.page.scss'],
 })
-export class TestSettingsPage {
+export class SettingsPage {
 
   @ViewChild('fcmForm') fcmForm: FcmFormComponent;
 

@@ -46,33 +46,16 @@ export class LoginPage {
       email: this.form?.loginForm.get('email').value,
       password: this.form?.loginForm.get('password').value,
     }
-    const medusaRequestMock: ICustomerLoginData = {
-      email: "roicoroy@test.com",
-      password: "Rwbento123"
-    }
-    // console.log(medusaRequest);
     this.store.dispatch(new StrapiUserActions.StrapiLogin(strapiRequest))
-    // .subscribe((state) => {
-    //   console.log(state);
-    // });
     this.store.dispatch(new CustomerActions.Login(medusaRequest))
-    // .subscribe((state) => {
-    //   console.log(state);
-    // });
-    // this.http.post('http://localhost:9000/store/auth', medusaRequest, { headers: this.headers }).subscribe((res) => {
-    //   console.group(res);
-    // });
-    setTimeout(() => {
-      const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
-      if (errorEntry === null) {
-        this.navigation.navigateFlip('/home');
-        // console.log(window.document.cookie);
-        // console.log(window);
-        this.utility.dismissLoading();
-      } else {
-        this.utility.dismissLoading();
-      }
-    }, 100);
+
+    const errorEntry = this.store.selectSnapshot<any>((state) => state.errorsLogging.errorEntry);
+    if (errorEntry === null) {
+      this.navigation.navigateFlip('/home');
+      this.utility.dismissLoading();
+    } else {
+      this.utility.dismissLoading();
+    }
   }
   back(): void {
     this.navigation.navControllerDefault('/home');

@@ -12,7 +12,6 @@ export const initRegisterStateModel: CustomerRegisterStateModel = {
 };
 @State({
     name: 'customerRegister',
-    // defaults: initRegisterStateModel,
 })
 @Injectable()
 export class CustomerRegisterState {
