@@ -66,8 +66,7 @@ export class PaymentComponent implements OnDestroy {
   back() {
     this.navigation.navigateFlip('checkout/flow/shipping');
   }
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnDestroy() {
-    // this.store.dispatch(new MedusaActions.UnSetSecretKey());
+    this.store.dispatch(new MedusaActions.UnSetSecretKey());
   }
 }

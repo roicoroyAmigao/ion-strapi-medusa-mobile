@@ -20,7 +20,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MedusaState } from './store/medusa/medusa.state';
 import localePT from '@angular/common/locales/pt';
 import localeEN from '@angular/common/locales/en';
-import localeUK from '@angular/common/locales/uk';
 import { CustomerState } from './store/customer/customer.state';
 import { AddressesState } from './store/addresses/addresses.state';
 import { FormsState } from './store/forms/forms.state';
@@ -36,17 +35,14 @@ import { CustomerRegisterState } from './store/customer-register/customer-regist
 import { LanguageState } from './store/language/language.state';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormComponentsModule } from 'projects/form-components/src/public-api';
-import { ErrorService } from 'projects/services/src/lib/errors/errors/server-error.service';
 import { StrapiAuthInterceptor } from 'projects/services/src/lib/services/strapi.interceptor';
 import { ProductState } from './store/products/products.state';
 import { CustomComponentsModule } from 'projects/components/src/public-api';
 import { CategoriesState } from './store/categories/categories.state';
 import { FcmState } from './store/fcm/fcm.state';
-import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(localePT, 'pt');
 registerLocaleData(localeEN, 'en');
-registerLocaleData(localeUK, 'uk');
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
@@ -122,17 +118,11 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: LOCALE_ID, useValue: 'en' },
-    // {
-    //   provide: ErrorHandler,
-    //   useClass: ErrorService,
-    //   multi: false
-    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: StrapiAuthInterceptor,
       multi: true
     },
-    CookieService
   ],
   bootstrap: [AppComponent],
 })

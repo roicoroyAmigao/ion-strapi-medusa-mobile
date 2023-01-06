@@ -15,12 +15,4 @@ export const environment = {
   MEDUSA_API_BASE_PATH: 'http://localhost:9000',
   STRIPE_KEY: 'pk_test_2qqvb6DTqKondL46mnEjZ68e',
   populate: '?populate=*',
-  todo: '/todo',
-  products: '/products',
-  medusa_store_login_customer: '/store/auth/',
-  medusa_store_register_customer: '/store/customers',
-  medusa_store_products: '/store/products',
-  medusa_regions: '/store/regions/',
-  create_medusa_cart: '/store/carts/',
-  medusa_store: '/admin/store/'
 };

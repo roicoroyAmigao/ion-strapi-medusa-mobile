@@ -40,9 +40,6 @@ export class AppComponent {
   async initApp() {
     this.platform.ready().then(() => {
       this.viewState$ = this.facade.viewState$;
-      // this.viewState$.subscribe((state: any) => {
-      //   console.log(state);
-      // });
       this.ionLanguageService.initTranslate();
       this.theme.initTheme();
     });
